@@ -1,0 +1,224 @@
+/*!
+ * vue-countdown v0.1.0
+ * https://github.com/xkeshi/vue-countdown
+ *
+ * Copyright (c) 2017 xkeshi
+ * Released under the MIT license
+ *
+ * Date: 2017-04-10T10:24:20.703Z
+ */
+
+var MILLISECONDS_SECOND = 1000;
+var MILLISECONDS_MINUTE = 60 * MILLISECONDS_SECOND;
+var MILLISECONDS_HOUR = 60 * MILLISECONDS_MINUTE;
+var MILLISECONDS_DAY = 24 * MILLISECONDS_HOUR;
+
+var Countdown = {
+  data: function data() {
+    return {
+      /**
+       * Total number of time (in milliseconds) for the countdown.
+       * @type {number}
+       */
+      count: 0,
+
+      /**
+       * Define if the time is countdowning.
+       * @type {boolean}
+       */
+      counting: false
+    };
+  },
+
+  props: {
+    /**
+     * Start to countdown automatically when initialized.
+     */
+    autoStart: {
+      type: Boolean,
+      default: true
+    },
+
+    /**
+     * Update interval time (in milliseconds) of the countdown.
+     */
+    interval: {
+      type: Number,
+      default: 1000
+    },
+
+    /**
+     * Total number of time (in milliseconds) for the countdown.
+     */
+    time: {
+      type: Number,
+      default: 0
+    },
+
+    /**
+     * The tag of the component root element in the countdown.
+     */
+    tag: {
+      type: String,
+      default: 'span'
+    }
+  },
+  computed: {
+    /**
+     * Remaining days.
+     * @returns {number}
+     */
+    days: function days() {
+      return Math.floor(this.count / MILLISECONDS_DAY);
+    },
+
+
+    /**
+     * Remaining hours.
+     * @returns {number}
+     */
+    hours: function hours() {
+      return Math.floor(this.count % MILLISECONDS_DAY / MILLISECONDS_HOUR);
+    },
+
+
+    /**
+     * Remaining minutes.
+     * @returns {number}
+     */
+    minutes: function minutes() {
+      return Math.floor(this.count % MILLISECONDS_HOUR / MILLISECONDS_MINUTE);
+    },
+
+
+    /**
+     * Remaining seconds.
+     * @returns {number}
+     */
+    seconds: function seconds() {
+      var interval = this.interval;
+      var seconds = this.count % MILLISECONDS_MINUTE / MILLISECONDS_SECOND;
+
+      if (interval < 10) {
+        return seconds.toFixed(3);
+      } else if (interval >= 10 && interval < 100) {
+        return seconds.toFixed(2);
+      } else if (interval >= 100 && interval < 1000) {
+        return seconds.toFixed(1);
+      }
+
+      return Math.floor(seconds);
+    }
+  },
+  render: function render(createElement) {
+    return createElement(this.tag, this.$scopedSlots.default ? [this.$scopedSlots.default({
+      days: this.days,
+      hours: this.hours,
+      minutes: this.minutes,
+      seconds: this.seconds
+    })] : this.$slots.default);
+  },
+  created: function created() {
+    this.count = this.time;
+  },
+  mounted: function mounted() {
+    if (this.autoStart) {
+      this.start();
+    }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.destroy();
+  },
+
+  methods: {
+    /**
+     * Start to countdown.
+     * @public
+     * @emits Countdown#countdownstart
+     */
+    start: function start() {
+      if (this.counting) {
+        return;
+      }
+
+      /**
+       * Countdown start event.
+       * @event Countdown#countdownstart
+       */
+      this.$emit('countdownstart');
+      this.counting = true;
+      this.step();
+    },
+
+
+    /**
+     * Step to countdown.
+     * @private
+     * @emits Countdown#countdownprogress
+     */
+    step: function step() {
+      var _this = this;
+
+      if (!this.counting) {
+        return;
+      }
+
+      /**
+       * Countdown progress event.
+       * @event Countdown#countdownprogress
+       */
+      this.$emit('countdownprogress', {
+        days: this.days,
+        hours: this.hours,
+        minutes: this.minutes,
+        seconds: this.seconds
+      });
+
+      var interval = this.interval;
+
+      this.timeout = setTimeout(function () {
+        _this.count -= _this.interval;
+
+        if (_this.count > 0) {
+          _this.step();
+        } else {
+          _this.stop();
+        }
+      }, interval);
+    },
+
+
+    /**
+     * Stop the countdown.
+     * @public
+     * @emits Countdown#countdownend
+     */
+    stop: function stop() {
+      this.destroy();
+
+      /**
+       * Countdown end event.
+       * @event Countdown#countdownend
+       */
+      this.$emit('countdownend');
+    },
+
+
+    /**
+     * Destroy the countdown.
+     * @private
+     */
+    destroy: function destroy() {
+      this.counting = false;
+      clearTimeout(this.timeout);
+    }
+  }
+};
+
+var index = {
+  install: function install(Vue) {
+    Vue.component('countdown', Countdown);
+  }
+};
+
+export default index;

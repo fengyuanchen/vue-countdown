@@ -1,0 +1,25 @@
+.jumbotron {
+  border-radius: 0;
+  color: #fff;
+}
+
+.jumbotron small {
+  font-size: .875rem;
+  opacity: 0.75;
+}
+
+.jumbotron p {
+  margin-bottom: 0;
+}
+
+footer {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.prettyprint {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem !important;
+  border: 1px solid #eee !important;
+}
