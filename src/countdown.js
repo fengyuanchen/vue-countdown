@@ -19,6 +19,7 @@ export default {
       counting: false,
     };
   },
+
   props: {
     /**
      * Start to countdown automatically when initialized.
@@ -42,6 +43,8 @@ export default {
     time: {
       type: Number,
       default: 0,
+      required: true,
+      validator: value => value >= 0,
     },
 
     /**
@@ -52,6 +55,7 @@ export default {
       default: 'span',
     },
   },
+
   computed: {
     /**
      * Remaining days.
@@ -96,6 +100,7 @@ export default {
       return Math.floor(seconds);
     },
   },
+
   render(createElement) {
     return createElement(this.tag, this.$scopedSlots.default ? [
       this.$scopedSlots.default({
@@ -106,17 +111,23 @@ export default {
       }),
     ] : this.$slots.default);
   },
+
   created() {
-    this.count = this.time;
+    if (this.time > 0) {
+      this.count = this.time;
+    }
   },
+
   mounted() {
     if (this.autoStart) {
       this.start();
     }
   },
+
   beforeDestroy() {
     this.destroy();
   },
+
   methods: {
     /**
      * Start to countdown.
@@ -158,17 +169,16 @@ export default {
         seconds: this.seconds,
       });
 
-      const interval = this.interval;
+      if (this.count > 0) {
+        const interval = this.interval;
 
-      this.timeout = setTimeout(() => {
-        this.count -= this.interval;
-
-        if (this.count > 0) {
+        this.timeout = setTimeout(() => {
+          this.count -= interval;
           this.step();
-        } else {
-          this.stop();
-        }
-      }, interval);
+        }, interval);
+      } else {
+        this.stop();
+      }
     },
 
     /**
