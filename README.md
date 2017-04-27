@@ -90,6 +90,8 @@ Update interval time (in milliseconds) of the countdown.
 
 Total number of time (in milliseconds) for the countdown.
 
+**Note:** The given value should not less than `0`.
+
 
 ### tag
 

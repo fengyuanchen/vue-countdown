@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v0.1.0
+ * vue-countdown v0.1.1
  * https://github.com/xkeshi/vue-countdown
  *
  * Copyright (c) 2017 xkeshi
  * Released under the MIT license
  *
- * Date: 2017-04-10T10:24:20.703Z
+ * Date: 2017-04-27T12:14:11.256Z
  */
 
 'use strict';
@@ -32,6 +32,7 @@ var Countdown = {
     };
   },
 
+
   props: {
     /**
      * Start to countdown automatically when initialized.
@@ -54,7 +55,11 @@ var Countdown = {
      */
     time: {
       type: Number,
-      default: 0
+      default: 0,
+      required: true,
+      validator: function validator(value) {
+        return value >= 0;
+      }
     },
 
     /**
@@ -65,6 +70,7 @@ var Countdown = {
       default: 'span'
     }
   },
+
   computed: {
     /**
      * Remaining days.
@@ -112,6 +118,7 @@ var Countdown = {
       return Math.floor(seconds);
     }
   },
+
   render: function render(createElement) {
     return createElement(this.tag, this.$scopedSlots.default ? [this.$scopedSlots.default({
       days: this.days,
@@ -121,7 +128,9 @@ var Countdown = {
     })] : this.$slots.default);
   },
   created: function created() {
-    this.count = this.time;
+    if (this.time > 0) {
+      this.count = this.time;
+    }
   },
   mounted: function mounted() {
     if (this.autoStart) {
@@ -131,6 +140,7 @@ var Countdown = {
   beforeDestroy: function beforeDestroy() {
     this.destroy();
   },
+
 
   methods: {
     /**
@@ -176,17 +186,16 @@ var Countdown = {
         seconds: this.seconds
       });
 
-      var interval = this.interval;
+      if (this.count > 0) {
+        var interval = this.interval;
 
-      this.timeout = setTimeout(function () {
-        _this.count -= _this.interval;
-
-        if (_this.count > 0) {
+        this.timeout = setTimeout(function () {
+          _this.count -= interval;
           _this.step();
-        } else {
-          _this.stop();
-        }
-      }, interval);
+        }, interval);
+      } else {
+        this.stop();
+      }
     },
 
 
