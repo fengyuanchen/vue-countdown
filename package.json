@@ -1,7 +1,7 @@
 {
   "name": "vue-countdown",
   "description": "Countdown component for Vue.js.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "dist/vue-countdown.common.js",
   "module": "dist/vue-countdown.esm.js",
   "browser": "dist/vue-countdown.js",
@@ -42,5 +42,8 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-watch": "^3.2.2",
     "uglify-js": "^2.8.22"
+  },
+  "peerDependencies": {
+    "vue": "^2.2.0"
   }
 }

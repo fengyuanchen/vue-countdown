@@ -39,49 +39,44 @@
   <div class="container">
     <h3>Examples</h3>
     <hr>
-    <div class="app"></div>
-    <script type="text/template" id="examples">
-      <div class="examples">
-        <countdown :time="time" :interval="100" tag="p">
-          <template scope="props">New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
+    <div id="app">
+      <countdown :time="time" :interval="100" tag="p">
+        <template scope="props">New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
+      </countdown>
+      <button type="button" class="btn btn-secondary" :disabled="counting" @click="countdown">
+        <countdown v-if="counting" :time="60000" @countdownend="countdownend">
+          <template scope="props">Fetch again {{ props.seconds || 60 }} seconds later</template>
         </countdown>
-        <button type="button" class="btn btn-secondary" :disabled="counting" @click="countdown">
-          <countdown v-if="counting" :time="6000" @countdownend="countdownend">
-            <template scope="props">Fetch again {{ props.seconds || 60 }} seconds later</template>
-          </countdown>
-          <span v-else>Fetch Verification Code</span>
-        </button>
-      </div>
-    </script>
+        <span v-else>Fetch Verification Code</span>
+      </button>
+    </div>
     <br>
 
     <h6>HTML:</h6>
-    <pre class="prettyprint">&lt;div class=&quot;app&quot;&gt;&lt;/div&gt;
-
-&lt;script type=&quot;text/template&quot; id=&quot;examples&quot;&gt;
-  &lt;div class=&quot;examples&quot;&gt;
-    &lt;countdown :time=&quot;time&quot; :interval=&quot;100&quot; tag=&quot;p&quot;&gt;
-      &lt;template scope=&quot;props&quot;&gt;New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.&lt;/template&gt;
+    <pre class="prettyprint">&lt;div id=&quot;app&quot;&gt;
+  &lt;countdown :time=&quot;time&quot; :interval=&quot;100&quot; tag=&quot;p&quot;&gt;
+    &lt;template scope=&quot;props&quot;&gt;New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.&lt;/template&gt;
+  &lt;/countdown&gt;
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; :disabled=&quot;counting&quot; @click=&quot;countdown&quot;&gt;
+    &lt;countdown v-if=&quot;counting&quot; :time=&quot;60000&quot; @countdownend=&quot;countdownend&quot;&gt;
+      &lt;template scope=&quot;props&quot;&gt;Fetch again {{ props.seconds || 60 }} seconds later&lt;/template&gt;
     &lt;/countdown&gt;
-
-    &lt;button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; :disabled=&quot;counting&quot; @click=&quot;countdown&quot;&gt;
-      &lt;countdown v-if=&quot;counting&quot; :time=&quot;60000&quot; @countdownend=&quot;countdownend&quot;&gt;
-        &lt;template scope=&quot;props&quot;&gt;Fetch again {{ props.seconds || 60 }} seconds later&lt;/template&gt;
-      &lt;/countdown&gt;
-      &lt;span v-else&gt;Fetch Verification Code&lt;/span&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-&lt;/script&gt;</pre>
+    &lt;span v-else&gt;Fetch Verification Code&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</pre>
 
     <h6>JavaScript:</h6>
     <pre class="prettyprint">window.addEventListener('DOMContentLoaded', function () {
   var Vue = window.Vue;
   var VueCountdown = window.VueCountdown;
-  var App = {
-    template: '#examples',
+
+  Vue.component('countdown', VueCountdown);
+
+  new Vue({
+    el: '#app',
     data: function () {
-      const now = new Date();
-      const newYear = new Date(now.getFullYear() + 1, 0, 1);
+      var now = new Date();
+      var newYear = new Date(now.getFullYear() + 1, 0, 1);
 
       return {
         counting: false,
@@ -96,17 +91,8 @@
         this.counting = false;
       },
     },
-  };
-
-  Vue.use(VueCountdown);
-
-  new Vue({
-    el: '.app',
-    render: function (createElement) {
-      return createElement(App);
-    },
   });
-}, false);</pre>
+});</pre>
   </div>
 
   <footer></footer>
@@ -115,7 +101,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
   <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-  <script src="https://unpkg.com/vue@2.2.6/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/vue@2.3.0/dist/vue.min.js"></script>
   <script src="js/vue-countdown.js"></script>
   <script src="js/main.js"></script>
 </body>

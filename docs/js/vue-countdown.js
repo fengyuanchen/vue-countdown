@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v0.1.1
+ * vue-countdown v0.2.0
  * https://github.com/xkeshi/vue-countdown
  *
  * Copyright (c) 2017 xkeshi
  * Released under the MIT license
  *
- * Date: 2017-04-27T12:14:11.256Z
+ * Date: 2017-04-28T08:54:32.323Z
  */
 
 (function (global, factory) {
@@ -19,7 +19,7 @@ var MILLISECONDS_MINUTE = 60 * MILLISECONDS_SECOND;
 var MILLISECONDS_HOUR = 60 * MILLISECONDS_MINUTE;
 var MILLISECONDS_DAY = 24 * MILLISECONDS_HOUR;
 
-var Countdown = {
+var index = {
   data: function data() {
     return {
       /**
@@ -227,12 +227,6 @@ var Countdown = {
       this.counting = false;
       clearTimeout(this.timeout);
     }
-  }
-};
-
-var index = {
-  install: function install(Vue) {
-    Vue.component('countdown', Countdown);
   }
 };
 

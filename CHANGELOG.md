@@ -1,6 +1,19 @@
 # Changelog
 
 
+## 0.2.0 (Apr 28, 2017)
+
+- Not to register the component automatically by default, but export the component directly.
+
+```js
+// Before
+Vue.use(VueCountdown);
+
+// After
+Vue.component('countdown', VueCountdown);
+```
+
+
 ## 0.1.1 (Apr 27, 2017)
 
 - Improved countdown progress.

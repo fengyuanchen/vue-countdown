@@ -26,11 +26,11 @@ export default {
   format: 'umd',
   moduleName: 'VueCountdown',
   plugins: [
-    babel({
-      exclude: '/node_modules/**',
+    nodeResolve({
+      jsnext: true,
     }),
-    nodeResolve({ jsnext: true }),
     commonjs(),
+    babel(),
   ],
   banner: `/*!
  * vue-countdown v${pkg.version}

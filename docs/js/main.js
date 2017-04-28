@@ -1,11 +1,14 @@
 window.addEventListener('DOMContentLoaded', function () {
   var Vue = window.Vue;
   var VueCountdown = window.VueCountdown;
-  var App = {
-    template: '#examples',
+
+  Vue.component('countdown', VueCountdown);
+
+  new Vue({
+    el: '#app',
     data: function () {
-      const now = new Date();
-      const newYear = new Date(now.getFullYear() + 1, 0, 1);
+      var now = new Date();
+      var newYear = new Date(now.getFullYear() + 1, 0, 1);
 
       return {
         counting: false,
@@ -20,14 +23,5 @@ window.addEventListener('DOMContentLoaded', function () {
         this.counting = false;
       },
     },
-  };
-
-  Vue.use(VueCountdown);
-
-  new Vue({
-    el: '.app',
-    render: function (createElement) {
-      return createElement(App);
-    },
   });
-}, false);
+});

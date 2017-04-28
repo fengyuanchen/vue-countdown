@@ -3,11 +3,12 @@
 > Countdown component for [Vue.js](https://vuejs.org/).
 
 
+
 ## Table of contents
 
 - [Main](#main)
 - [Getting started](#getting-started)
-- [Props / Options](#props)
+- [Props](#props)
 - [Methods](#methods)
 - [Events](#events)
 - [Browser support](#browser-support)
@@ -45,7 +46,7 @@ dist/
 - ES2015: `import VueCountdown from 'vue-countdown'`
 
 ```js
-Vue.use(VueCountdown);
+Vue.component('countdown', VueCountdown);
 ```
 
 ```html
