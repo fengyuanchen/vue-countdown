@@ -28,7 +28,8 @@
     "build": "rollup -c",
     "compress": "uglifyjs ./dist/vue-countdown.js -o ./dist/vue-countdown.min.js -c -m --comments /^!/",
     "prebuild": "npm run lint",
-    "postbuild": "npm run compress"
+    "postbuild": "npm run compress",
+    "start": "npm run dev"
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
