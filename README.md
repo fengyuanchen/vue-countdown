@@ -2,6 +2,8 @@
 
 > Countdown component for [Vue.js](https://vuejs.org/).
 
+- [Website](https://xkeshi.github.io/vue-countdown)
+
 
 
 ## Table of contents
