@@ -175,9 +175,12 @@ export default {
 
   watch: {
     time() {
-      if (this.autoStart && this.time > 0) {
+      if (this.time > 0) {
         this.count = this.time;
-        this.start();
+
+        if (this.autoStart) {
+          this.start();
+        }
       }
     },
   },
