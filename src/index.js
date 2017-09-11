@@ -148,6 +148,11 @@ export default {
         hours: this.hours,
         minutes: this.minutes,
         seconds: this.seconds,
+        totalDays: this.totalDays,
+        totalHours: this.totalHours,
+        totalMinutes: this.totalMinutes,
+        totalSeconds: this.totalSeconds,
+        totalMilliseconds: this.totalMilliseconds,
       }),
     ] : this.$slots.default);
   },
