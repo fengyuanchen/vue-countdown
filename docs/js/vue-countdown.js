@@ -5,7 +5,7 @@
  * Copyright (c) 2017 xkeshi
  * Released under the MIT license
  *
- * Date: 2017-09-11T01:32:09.711Z
+ * Date: 2017-09-11T01:54:29.764Z
  */
 
 (function (global, factory) {
@@ -173,7 +173,12 @@ var index = {
       days: this.days,
       hours: this.hours,
       minutes: this.minutes,
-      seconds: this.seconds
+      seconds: this.seconds,
+      totalDays: this.totalDays,
+      totalHours: this.totalHours,
+      totalMinutes: this.totalMinutes,
+      totalSeconds: this.totalSeconds,
+      totalMilliseconds: this.totalMilliseconds
     })] : this.$slots.default);
   },
   created: function created() {
