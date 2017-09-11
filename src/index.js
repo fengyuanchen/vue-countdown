@@ -128,6 +128,15 @@ export default {
     this.destroy();
   },
 
+  watch: {
+    time() {
+      if (this.autoStart && this.time > 0) {
+        this.count = this.time;
+        this.start();
+      }
+    },
+  },
+
   methods: {
     /**
      * Start to countdown.
