@@ -5,7 +5,7 @@
  * Copyright (c) 2017 xkeshi
  * Released under the MIT license
  *
- * Date: 2017-04-28T08:54:32.323Z
+ * Date: 2017-09-11T02:13:49.028Z
  */
 
 var MILLISECONDS_SECOND = 1000;
@@ -139,6 +139,15 @@ var index = {
     this.destroy();
   },
 
+
+  watch: {
+    time: function time() {
+      if (this.autoStart && this.time > 0) {
+        this.count = this.time;
+        this.start();
+      }
+    }
+  },
 
   methods: {
     /**
