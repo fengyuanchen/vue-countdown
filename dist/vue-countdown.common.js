@@ -5,7 +5,7 @@
  * Copyright (c) 2017 xkeshi
  * Released under the MIT license
  *
- * Date: 2017-09-11T01:54:29.764Z
+ * Date: 2017-09-11T02:13:49.028Z
  */
 
 'use strict';
@@ -191,6 +191,15 @@ var index = {
     this.destroy();
   },
 
+
+  watch: {
+    time: function time() {
+      if (this.autoStart && this.time > 0) {
+        this.count = this.time;
+        this.start();
+      }
+    }
+  },
 
   methods: {
     /**
