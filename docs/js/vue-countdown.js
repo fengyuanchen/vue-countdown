@@ -5,7 +5,7 @@
  * Copyright (c) 2017 xkeshi
  * Released under the MIT license
  *
- * Date: 2017-04-28T08:54:32.323Z
+ * Date: 2017-09-11T02:19:01.459Z
  */
 
 (function (global, factory) {
@@ -120,6 +120,51 @@ var index = {
       }
 
       return Math.floor(seconds);
+    },
+
+
+    /**
+     * All remaining days.
+     * @returns {number}
+     */
+    totalDays: function totalDays() {
+      return this.days;
+    },
+
+
+    /**
+     * All remaining hours.
+     * @returns {number}
+     */
+    totalHours: function totalHours() {
+      return this.totalDays * (MILLISECONDS_DAY / MILLISECONDS_HOUR) + this.hours;
+    },
+
+
+    /**
+     * All remaining minutes.
+     * @returns {number}
+     */
+    totalMinutes: function totalMinutes() {
+      return this.totalHours * (MILLISECONDS_HOUR / MILLISECONDS_MINUTE) + this.minutes;
+    },
+
+
+    /**
+     * All remaining seconds.
+     * @returns {number}
+     */
+    totalSeconds: function totalSeconds() {
+      return this.totalMinutes * (MILLISECONDS_MINUTE / MILLISECONDS_SECOND) + this.seconds;
+    },
+
+
+    /**
+     * All remaining milliseconds.
+     * @returns {number}
+     */
+    totalMilliseconds: function totalMilliseconds() {
+      return this.count;
     }
   },
 
@@ -128,7 +173,12 @@ var index = {
       days: this.days,
       hours: this.hours,
       minutes: this.minutes,
-      seconds: this.seconds
+      seconds: this.seconds,
+      totalDays: this.totalDays,
+      totalHours: this.totalHours,
+      totalMinutes: this.totalMinutes,
+      totalSeconds: this.totalSeconds,
+      totalMilliseconds: this.totalMilliseconds
     })] : this.$slots.default);
   },
   created: function created() {
@@ -145,6 +195,18 @@ var index = {
     this.destroy();
   },
 
+
+  watch: {
+    time: function time() {
+      if (this.time > 0) {
+        this.count = this.time;
+
+        if (this.autoStart) {
+          this.start();
+        }
+      }
+    }
+  },
 
   methods: {
     /**

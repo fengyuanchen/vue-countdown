@@ -99,6 +99,46 @@ export default {
 
       return Math.floor(seconds);
     },
+
+    /**
+     * All remaining days.
+     * @returns {number}
+     */
+    totalDays() {
+      return this.days;
+    },
+
+    /**
+     * All remaining hours.
+     * @returns {number}
+     */
+    totalHours() {
+      return (this.totalDays * (MILLISECONDS_DAY / MILLISECONDS_HOUR)) + this.hours;
+    },
+
+    /**
+     * All remaining minutes.
+     * @returns {number}
+     */
+    totalMinutes() {
+      return (this.totalHours * (MILLISECONDS_HOUR / MILLISECONDS_MINUTE)) + this.minutes;
+    },
+
+    /**
+     * All remaining seconds.
+     * @returns {number}
+     */
+    totalSeconds() {
+      return (this.totalMinutes * (MILLISECONDS_MINUTE / MILLISECONDS_SECOND)) + this.seconds;
+    },
+
+    /**
+     * All remaining milliseconds.
+     * @returns {number}
+     */
+    totalMilliseconds() {
+      return this.count;
+    },
   },
 
   render(createElement) {
@@ -108,6 +148,11 @@ export default {
         hours: this.hours,
         minutes: this.minutes,
         seconds: this.seconds,
+        totalDays: this.totalDays,
+        totalHours: this.totalHours,
+        totalMinutes: this.totalMinutes,
+        totalSeconds: this.totalSeconds,
+        totalMilliseconds: this.totalMilliseconds,
       }),
     ] : this.$slots.default);
   },
@@ -126,6 +171,18 @@ export default {
 
   beforeDestroy() {
     this.destroy();
+  },
+
+  watch: {
+    time() {
+      if (this.time > 0) {
+        this.count = this.time;
+
+        if (this.autoStart) {
+          this.start();
+        }
+      }
+    },
   },
 
   methods: {
