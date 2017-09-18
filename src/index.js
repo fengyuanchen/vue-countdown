@@ -86,7 +86,7 @@ export default {
      * @returns {number}
      */
     seconds() {
-      const interval = this.interval;
+      const { interval } = this;
       const seconds = (this.count % MILLISECONDS_MINUTE) / MILLISECONDS_SECOND;
 
       if (interval < 10) {
@@ -101,7 +101,7 @@ export default {
     },
 
     /**
-     * All remaining days.
+     * Total remaining days.
      * @returns {number}
      */
     totalDays() {
@@ -109,35 +109,27 @@ export default {
     },
 
     /**
-     * All remaining hours.
+     * Total remaining hours.
      * @returns {number}
      */
     totalHours() {
-      return (this.totalDays * (MILLISECONDS_DAY / MILLISECONDS_HOUR)) + this.hours;
+      return Math.floor(this.count / MILLISECONDS_HOUR);
     },
 
     /**
-     * All remaining minutes.
+     * Total remaining minutes.
      * @returns {number}
      */
     totalMinutes() {
-      return (this.totalHours * (MILLISECONDS_HOUR / MILLISECONDS_MINUTE)) + this.minutes;
+      return Math.floor(this.count / MILLISECONDS_MINUTE);
     },
 
     /**
-     * All remaining seconds.
+     * Total remaining seconds.
      * @returns {number}
      */
     totalSeconds() {
-      return (this.totalMinutes * (MILLISECONDS_MINUTE / MILLISECONDS_SECOND)) + this.seconds;
-    },
-
-    /**
-     * All remaining milliseconds.
-     * @returns {number}
-     */
-    totalMilliseconds() {
-      return this.count;
+      return Math.floor(this.count / MILLISECONDS_SECOND);
     },
   },
 
@@ -152,7 +144,6 @@ export default {
         totalHours: this.totalHours,
         totalMinutes: this.totalMinutes,
         totalSeconds: this.totalSeconds,
-        totalMilliseconds: this.totalMilliseconds,
       }),
     ] : this.$slots.default);
   },
@@ -227,7 +218,7 @@ export default {
       });
 
       if (this.count > 0) {
-        const interval = this.interval;
+        const { interval } = this;
 
         this.timeout = setTimeout(() => {
           this.count -= interval;
