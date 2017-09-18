@@ -6,25 +6,26 @@ const pkg = require('./package');
 const now = new Date();
 
 export default {
-  entry: 'src/index.js',
-  targets: [
+  input: 'src/index.js',
+  output: [
     {
-      dest: 'dist/vue-countdown.js',
+      file: 'dist/vue-countdown.js',
+      format: 'umd',
     },
     {
-      dest: 'dist/vue-countdown.common.js',
+      file: 'dist/vue-countdown.common.js',
       format: 'cjs',
     },
     {
-      dest: 'dist/vue-countdown.esm.js',
+      file: 'dist/vue-countdown.esm.js',
       format: 'es',
     },
     {
-      dest: 'docs/js/vue-countdown.js',
+      file: 'docs/js/vue-countdown.js',
+      format: 'umd',
     },
   ],
-  format: 'umd',
-  moduleName: 'VueCountdown',
+  name: 'VueCountdown',
   plugins: [
     nodeResolve({
       jsnext: true,
@@ -36,7 +37,7 @@ export default {
  * vue-countdown v${pkg.version}
  * https://github.com/${pkg.repository}
  *
- * Copyright (c) ${now.getFullYear()} ${pkg.author}
+ * Copyright (c) ${now.getFullYear()} Xkeshi
  * Released under the ${pkg.license} license
  *
  * Date: ${now.toISOString()}
