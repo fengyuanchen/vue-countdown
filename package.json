@@ -1,20 +1,27 @@
 {
-  "name": "vue-countdown",
+  "name": "@xkeshi/vue-countdown",
   "description": "Countdown component for Vue.js.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/vue-countdown.common.js",
   "module": "dist/vue-countdown.esm.js",
   "browser": "dist/vue-countdown.js",
   "repository": "xkeshi/vue-countdown",
+  "homepage": "https://xkeshi.github.io/vue-countdown",
   "license": "MIT",
-  "author": "xkeshi",
+  "author": {
+    "name": "Chen Fengyuan",
+    "email": "chenfengyuan@outlook.com",
+    "url": "http://chenfengyuan.com"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
   "keywords": [
     "vue",
-    "vuejs",
-    "vue.js",
-    "vue-component",
     "countdown",
     "component",
+    "vue-component",
     "html",
     "css",
     "javascript",
@@ -24,7 +31,7 @@
   ],
   "scripts": {
     "dev": "rollup -c -m -w",
-    "lint": "eslint ./src",
+    "lint": "eslint src",
     "build": "rollup -c",
     "compress": "uglifyjs ./dist/vue-countdown.js -o ./dist/vue-countdown.min.js -c -m --comments /^!/",
     "prebuild": "npm run lint",
@@ -32,17 +39,17 @@
     "start": "npm run dev"
   },
   "devDependencies": {
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-es2015": "^6.24.1",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.1.3",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^4.7.0",
+    "eslint-config-airbnb-base": "^12.0.0",
     "eslint-plugin-import": "^2.2.0",
-    "rollup": "^0.41.6",
-    "rollup-plugin-babel": "^2.7.1",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-watch": "^3.2.2",
-    "uglify-js": "^2.8.22"
+    "rollup-watch": "^4.3.1",
+    "uglify-js": "^3.1.1"
   },
   "peerDependencies": {
     "vue": "^2.2.0"

@@ -4,8 +4,6 @@
 
 - [Website](https://xkeshi.github.io/vue-countdown)
 
-
-
 ## Table of contents
 
 - [Main](#main)
@@ -17,29 +15,23 @@
 - [Versioning](#versioning)
 - [License](#license)
 
-
-
 ## Main
 
-```
+```text
 dist/
-├── vue-countdown.js        (5 KB, UMD)
-├── vue-countdown.min.js    (2 KB, UMD, compressed)
-├── vue-countdown.common.js (5 KB, CommonJS)
-└── vue-countdown.esm.js    (5 KB, ES Module)
+├── vue-countdown.js        (UMD)
+├── vue-countdown.min.js    (UMD, compressed)
+├── vue-countdown.common.js (CommonJS, default)
+└── vue-countdown.esm.js    (ES Module)
 ```
-
-
 
 ## Getting started
 
+### Install
 
-### Download
-
-- [Download the latest release](https://github.com/xkeshi/vue-countdown/archive/master.zip).
-- Clone the repository: `git clone https://github.com/xkeshi/vue-countdown.git`.
-- Install with [NPM](https://npmjs.com): `npm install xkeshi/vue-countdown`.
-
+```bash
+npm install @xkeshi/vue-countdown --save-dev
+```
 
 ### Usage
 
@@ -58,11 +50,7 @@ Vue.component('countdown', VueCountdown);
 <!-- <span>Time Remaining：1 days, 23 hours, 59 minutes, 59 seconds.</span> -->
 ```
 
-
-
 [⬆ back to top](#table-of-contents)
-
-
 
 ## Props
 
@@ -72,7 +60,6 @@ Vue.component('countdown', VueCountdown);
 - Default: `true`
 
 Start to countdown automatically when initialized.
-
 
 ### interval
 
@@ -85,7 +72,6 @@ Update interval time (in milliseconds) of the countdown.
 <countdown v-bind:interval="100"></countdown>
 ```
 
-
 ### time
 
 - Type: `Number`
@@ -95,7 +81,6 @@ Total number of time (in milliseconds) for the countdown.
 
 **Note:** The given value should not less than `0`.
 
-
 ### tag
 
 - Type: `String`
@@ -103,10 +88,7 @@ Total number of time (in milliseconds) for the countdown.
 
 The tag of the component root element in the countdown.
 
-
-
 ## Methods
-
 
 ### start
 
@@ -124,19 +106,15 @@ export default {
 };
 ```
 
-
 ### stop
 
 Stop the countdown.
-
-
 
 ## Events
 
 ### countdownstart
 
 This event fires when countdown started.
-
 
 ### countdownprogress
 
@@ -159,15 +137,11 @@ export default {
 };
 ```
 
-
 ### countdownend
 
 This event fires when countdown stoped.
 
-
 [⬆ back to top](#table-of-contents)
-
-
 
 ## Browser support
 
@@ -178,16 +152,12 @@ This event fires when countdown stoped.
 - Edge (latest)
 - Internet Explorer 9+
 
-
-
 ## Versioning
 
 Maintained under the [Semantic Versioning guidelines](http://semver.org/).
 
-
-
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [xkeshi](http://xkeshi.com)
+[MIT](http://opensource.org/licenses/MIT) © [Xkeshi](http://xkeshi.com)
 
 [⬆ back to top](#table-of-contents)

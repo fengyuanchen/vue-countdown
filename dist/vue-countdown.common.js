@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v0.2.0
+ * vue-countdown v0.3.0
  * https://github.com/xkeshi/vue-countdown
  *
- * Copyright (c) 2017 xkeshi
+ * Copyright (c) 2017 Xkeshi
  * Released under the MIT license
  *
- * Date: 2017-09-11T02:19:01.459Z
+ * Date: 2017-09-18T03:27:54.469Z
  */
 
 'use strict';
@@ -105,6 +105,7 @@ var index = {
      */
     seconds: function seconds() {
       var interval = this.interval;
+
       var seconds = this.count % MILLISECONDS_MINUTE / MILLISECONDS_SECOND;
 
       if (interval < 10) {
@@ -120,7 +121,7 @@ var index = {
 
 
     /**
-     * All remaining days.
+     * Total remaining days.
      * @returns {number}
      */
     totalDays: function totalDays() {
@@ -129,38 +130,29 @@ var index = {
 
 
     /**
-     * All remaining hours.
+     * Total remaining hours.
      * @returns {number}
      */
     totalHours: function totalHours() {
-      return this.totalDays * (MILLISECONDS_DAY / MILLISECONDS_HOUR) + this.hours;
+      return Math.floor(this.count / MILLISECONDS_HOUR);
     },
 
 
     /**
-     * All remaining minutes.
+     * Total remaining minutes.
      * @returns {number}
      */
     totalMinutes: function totalMinutes() {
-      return this.totalHours * (MILLISECONDS_HOUR / MILLISECONDS_MINUTE) + this.minutes;
+      return Math.floor(this.count / MILLISECONDS_MINUTE);
     },
 
 
     /**
-     * All remaining seconds.
+     * Total remaining seconds.
      * @returns {number}
      */
     totalSeconds: function totalSeconds() {
-      return this.totalMinutes * (MILLISECONDS_MINUTE / MILLISECONDS_SECOND) + this.seconds;
-    },
-
-
-    /**
-     * All remaining milliseconds.
-     * @returns {number}
-     */
-    totalMilliseconds: function totalMilliseconds() {
-      return this.count;
+      return Math.floor(this.count / MILLISECONDS_SECOND);
     }
   },
 
@@ -173,8 +165,7 @@ var index = {
       totalDays: this.totalDays,
       totalHours: this.totalHours,
       totalMinutes: this.totalMinutes,
-      totalSeconds: this.totalSeconds,
-      totalMilliseconds: this.totalMilliseconds
+      totalSeconds: this.totalSeconds
     })] : this.$slots.default);
   },
   created: function created() {
@@ -250,6 +241,7 @@ var index = {
 
       if (this.count > 0) {
         var interval = this.interval;
+
 
         this.timeout = setTimeout(function () {
           _this.count -= interval;

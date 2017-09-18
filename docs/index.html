@@ -8,11 +8,12 @@
   <meta name="keywords" content="HTML, CSS, JS, JavaScript, vue, vuejs, vue.js, vue component, countdown, component, front-end, frontend, web development">
   <meta name="author" content="Fengyuan Chen">
   <title>vue-countdown</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.10.0/styles/github.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <header class="navbar navbar-light navbar-toggleable-md">
+  <header class="navbar navbar-light navbar-expand-md">
     <nav class="container">
       <a class="navbar-brand" href="./">vue-countdown</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +32,7 @@
 
   <div class="jumbotron bg-primary">
     <div class="container">
-      <h1>vue-countdown <small>v0.2.0</small></h1>
+      <h1>vue-countdown <small>v0.3.0</small></h1>
       <p class="lead">Countdown component for Vue.js.</p>
     </div>
   </div>
@@ -43,7 +44,10 @@
       <countdown :time="time" :interval="100" tag="p">
         <template scope="props">New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
       </countdown>
-      <button type="button" class="btn btn-secondary" :disabled="counting" @click="countdown">
+      <countdown :time="time" :interval="100" tag="p">
+        <template scope="props">Christmas Time Remaining: {{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds.</template>
+      </countdown>
+      <button type="button" class="btn btn-primary" :disabled="counting" @click="countdown">
         <countdown v-if="counting" :time="60000" @countdownend="countdownend">
           <template scope="props">Fetch again {{ props.seconds || 60 }} seconds later</template>
         </countdown>
@@ -53,20 +57,25 @@
     <br>
 
     <h6>HTML:</h6>
-    <pre class="prettyprint">&lt;div id=&quot;app&quot;&gt;
+    <pre><code class="language-html">&lt;div id=&quot;app&quot;&gt;
   &lt;countdown :time=&quot;time&quot; :interval=&quot;100&quot; tag=&quot;p&quot;&gt;
     &lt;template scope=&quot;props&quot;&gt;New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.&lt;/template&gt;
   &lt;/countdown&gt;
+
+  &lt;countdown :time=&quot;time&quot; :interval=&quot;100&quot; tag=&quot;p&quot;&gt;
+    &lt;template scope=&quot;props&quot;&gt;Christmas Time Remaining：{{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds.&lt;/template&gt;
+  &lt;/countdown&gt;
+
   &lt;button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; :disabled=&quot;counting&quot; @click=&quot;countdown&quot;&gt;
     &lt;countdown v-if=&quot;counting&quot; :time=&quot;60000&quot; @countdownend=&quot;countdownend&quot;&gt;
       &lt;template scope=&quot;props&quot;&gt;Fetch again {{ props.seconds || 60 }} seconds later&lt;/template&gt;
     &lt;/countdown&gt;
     &lt;span v-else&gt;Fetch Verification Code&lt;/span&gt;
   &lt;/button&gt;
-&lt;/div&gt;</pre>
+&lt;/div&gt;</code></pre>
 
     <h6>JavaScript:</h6>
-    <pre class="prettyprint">window.addEventListener('DOMContentLoaded', function () {
+    <pre><code class="language-js">window.addEventListener('DOMContentLoaded', function () {
   var Vue = window.Vue;
   var VueCountdown = window.VueCountdown;
 
@@ -92,16 +101,17 @@
       },
     },
   });
-});</pre>
+});</code></pre>
   </div>
 
   <footer></footer>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-  <script src="https://unpkg.com/vue@2.3.0/dist/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/vue@2.4.4/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/highlightjs@9.10.0/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
   <script src="js/vue-countdown.js"></script>
   <script src="js/main.js"></script>
 </body>
