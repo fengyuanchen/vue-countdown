@@ -34,7 +34,7 @@
     "lint": "eslint src",
     "build": "rollup -c",
     "compress": "uglifyjs ./dist/vue-countdown.js -o ./dist/vue-countdown.min.js -c -m --comments /^!/",
-    "prebuild": "npm run lint",
+    "prebuild": "npm run lint --fix",
     "postbuild": "npm run compress",
     "start": "npm run dev"
   },
