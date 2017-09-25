@@ -29,15 +29,15 @@ dist/
 
 ### Install
 
-```bash
-npm install @xkeshi/vue-countdown --save-dev
+```shell
+npm install @xkeshi/vue-countdown
 ```
 
 ### Usage
 
 - Browser: `window.VueCountdown`
-- CommonJS: `var VueCountdown = require('vue-countdown')`
-- ES2015: `import VueCountdown from 'vue-countdown'`
+- CommonJS: `var VueCountdown = require('@xkeshi/vue-countdown')`
+- ES2015: `import VueCountdown from '@xkeshi/vue-countdown'`
 
 ```js
 Vue.component('countdown', VueCountdown);
