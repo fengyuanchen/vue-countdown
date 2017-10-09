@@ -168,7 +168,7 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener('focus', this.onFocus);
-    this.destroy();
+    clearTimeout(this.timeout);
   },
 
   watch: {
@@ -249,7 +249,8 @@ export default {
      */
     stop() {
       this.count = 0;
-      this.destroy();
+      this.counting = false;
+      this.timeout = undefined;
 
       /**
        * Countdown end event.
@@ -264,15 +265,6 @@ export default {
      */
     update() {
       this.count = Math.min(0, this.endTime - Date.now());
-    },
-
-    /**
-     * Destroy the countdown.
-     * @private
-     */
-    destroy() {
-      this.counting = false;
-      clearTimeout(this.timeout);
     },
   },
 };
