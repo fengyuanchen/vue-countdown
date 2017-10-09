@@ -248,6 +248,7 @@ export default {
           this.step();
         }, interval);
       } else {
+        this.count = 0;
         this.stop();
       }
     },
@@ -258,7 +259,6 @@ export default {
      * @emits Countdown#countdownend
      */
     stop() {
-      this.count = 0;
       this.counting = false;
       this.timeout = undefined;
 
@@ -274,7 +274,7 @@ export default {
      * @private
      */
     update() {
-      this.count = Math.min(0, this.endTime - Date.now());
+      this.count = Math.max(0, this.endTime - Date.now());
     },
   },
 };
