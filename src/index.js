@@ -17,6 +17,12 @@ export default {
        * @type {boolean}
        */
       counting: false,
+
+      /**
+       * The absolute end time.
+       * @type {number}
+       */
+      endTime: Date.now(),
     };
   },
 
@@ -149,34 +155,41 @@ export default {
   },
 
   created() {
-    if (this.time > 0) {
-      this.count = this.time;
-    }
+    this.init();
   },
 
   mounted() {
     if (this.autoStart) {
       this.start();
     }
+
+    window.addEventListener('focus', (this.onFocus = this.update.bind(this)));
   },
 
   beforeDestroy() {
+    window.removeEventListener('focus', this.onFocus);
     this.destroy();
   },
 
   watch: {
     time() {
-      if (this.time > 0) {
-        this.count = this.time;
-
-        if (this.autoStart) {
-          this.start();
-        }
-      }
+      this.init();
     },
   },
 
   methods: {
+    /**
+     * Initialize count.
+     */
+    init() {
+      const { time } = this;
+
+      if (time > 0) {
+        this.count = time;
+        this.endTime = Date.now() + time;
+      }
+    },
+
     /**
      * Start to countdown.
      * @public
@@ -235,6 +248,7 @@ export default {
      * @emits Countdown#countdownend
      */
     stop() {
+      this.count = 0;
       this.destroy();
 
       /**
@@ -242,6 +256,14 @@ export default {
        * @event Countdown#countdownend
        */
       this.$emit('countdownend');
+    },
+
+    /**
+     * Update the count.
+     * @private
+     */
+    update() {
+      this.count = Math.min(0, this.endTime - Date.now());
     },
 
     /**
