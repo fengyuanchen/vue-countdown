@@ -10,7 +10,6 @@
   <title>vue-countdown</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.10.0/styles/github.css">
-  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <header class="navbar navbar-light navbar-expand-md">
@@ -20,19 +19,19 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbar-collapse" role="navigation">
-        <nav class="nav navbar-nav float-xs-right">
+        <nav class="nav navbar-nav">
           <a class="nav-link" href="https://github.com/xkeshi/vue-countdown/blob/master/README.md">Docs</a>
           <a class="nav-link" href="https://github.com/xkeshi/vue-countdown/blob/master/LICENSE">License</a>
-          <a class="nav-link" href="https://github.com/xkeshi/vue-countdown">GitHub</a>
-          <a class="nav-link" href="https://github.com/xkeshi">About</a>
+          <a class="nav-link" href="https://github.com/xkeshi/vue-countdown" title="View the GitHub project">GitHub</a>
+          <a class="nav-link" href="https://github.com/xkeshi" title="About the author">About</a>
         </nav>
       </div>
     </nav>
   </header>
 
-  <div class="jumbotron bg-primary">
+  <div class="jumbotron rounded-0 bg-primary text-white">
     <div class="container">
-      <h1>vue-countdown <small>v0.3.0</small></h1>
+      <h1>vue-countdown <small class="h6">v0.4.0</small></h1>
       <p class="lead">Countdown component for Vue.js.</p>
     </div>
   </div>
@@ -41,10 +40,10 @@
     <h3>Examples</h3>
     <hr>
     <div id="app">
-      <countdown :time="time" :interval="100" tag="p">
+      <countdown ref="c1" :time="time" :interval="100" tag="p">
         <template scope="props">New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
       </countdown>
-      <countdown :time="time" :interval="100" tag="p">
+      <countdown ref="c2" :time="time" :interval="100" tag="p">
         <template scope="props">Christmas Time Remaining: {{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds.</template>
       </countdown>
       <button type="button" class="btn btn-primary" :disabled="counting" @click="countdown">
@@ -54,6 +53,7 @@
         <span v-else>Fetch Verification Code</span>
       </button>
     </div>
+    <p class="count"></p>
     <br>
 
     <h6>HTML:</h6>

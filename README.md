@@ -47,7 +47,7 @@ Vue.component('countdown', VueCountdown);
 <countdown :time="2 * 24 * 60 * 60 * 1000">
   <template scope="props">Time Remaining：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
 </countdown>
-<!-- <span>Time Remaining：1 days, 23 hours, 59 minutes, 59 seconds.</span> -->
+<!-- <span>Time Remaining：01 days, 23 hours, 59 minutes, 59 seconds.</span> -->
 ```
 
 [⬆ back to top](#table-of-contents)
@@ -60,6 +60,13 @@ Vue.component('countdown', VueCountdown);
 - Default: `true`
 
 Start to countdown automatically when initialized.
+
+### leadingZero
+
+- Type: `Boolean`
+- Default: `true`
+
+Add a leading zero to the output days, hours, minutes and seconds if they are less than 10.
 
 ### interval
 
@@ -139,7 +146,7 @@ export default {
 
 ### countdownend
 
-This event fires when countdown stoped.
+This event fires when countdown stopped.
 
 [⬆ back to top](#table-of-contents)
 

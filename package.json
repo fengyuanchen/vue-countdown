@@ -1,7 +1,7 @@
 {
   "name": "@xkeshi/vue-countdown",
   "description": "Countdown component for Vue.js.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "dist/vue-countdown.common.js",
   "module": "dist/vue-countdown.esm.js",
   "browser": "dist/vue-countdown.js",
@@ -9,8 +9,7 @@
   "homepage": "https://xkeshi.github.io/vue-countdown",
   "license": "MIT",
   "author": {
-    "name": "Chen Fengyuan",
-    "email": "chenfengyuan@outlook.com",
+    "name": "Fengyuan Chen",
     "url": "http://chenfengyuan.com"
   },
   "files": [
@@ -41,15 +40,15 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.0",
-    "eslint": "^4.7.0",
-    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb-base": "^12.0.2",
     "eslint-plugin-import": "^2.2.0",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-watch": "^4.3.1",
-    "uglify-js": "^3.1.1"
+    "uglify-js": "^3.1.3"
   },
   "peerDependencies": {
     "vue": "^2.2.0"

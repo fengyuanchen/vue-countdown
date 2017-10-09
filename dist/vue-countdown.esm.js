@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v0.3.0
+ * vue-countdown v0.4.0
  * https://github.com/xkeshi/vue-countdown
  *
  * Copyright (c) 2017 Xkeshi
  * Released under the MIT license
  *
- * Date: 2017-09-18T03:27:54.469Z
+ * Date: 2017-10-09T07:10:09.418Z
  */
 
 var MILLISECONDS_SECOND = 1000;
@@ -26,7 +26,13 @@ var index = {
        * Define if the time is countdowning.
        * @type {boolean}
        */
-      counting: false
+      counting: false,
+
+      /**
+       * The absolute end time.
+       * @type {number}
+       */
+      endTime: Date.now()
     };
   },
 
@@ -46,6 +52,14 @@ var index = {
     interval: {
       type: Number,
       default: 1000
+    },
+
+    /**
+     * Add a leading zero to the output numbers if they are less than 10.
+     */
+    leadingZero: {
+      type: Boolean,
+      default: true
     },
 
     /**
@@ -155,11 +169,17 @@ var index = {
   },
 
   render: function render(createElement) {
+    var _this = this;
+
+    var preprocess = function preprocess(value) {
+      return _this.leadingZero && value < 10 ? '0' + value : value;
+    };
+
     return createElement(this.tag, this.$scopedSlots.default ? [this.$scopedSlots.default({
-      days: this.days,
-      hours: this.hours,
-      minutes: this.minutes,
-      seconds: this.seconds,
+      days: preprocess(this.days),
+      hours: preprocess(this.hours),
+      minutes: preprocess(this.minutes),
+      seconds: preprocess(this.seconds),
       totalDays: this.totalDays,
       totalHours: this.totalHours,
       totalMinutes: this.totalMinutes,
@@ -167,33 +187,42 @@ var index = {
     })] : this.$slots.default);
   },
   created: function created() {
-    if (this.time > 0) {
-      this.count = this.time;
-    }
+    this.init();
   },
   mounted: function mounted() {
     if (this.autoStart) {
       this.start();
     }
+
+    window.addEventListener('focus', this.onFocus = this.update.bind(this));
   },
   beforeDestroy: function beforeDestroy() {
-    this.destroy();
+    window.removeEventListener('focus', this.onFocus);
+    clearTimeout(this.timeout);
   },
 
 
   watch: {
     time: function time() {
-      if (this.time > 0) {
-        this.count = this.time;
-
-        if (this.autoStart) {
-          this.start();
-        }
-      }
+      this.init();
     }
   },
 
   methods: {
+    /**
+     * Initialize count.
+     */
+    init: function init() {
+      var time = this.time;
+
+
+      if (time > 0) {
+        this.count = time;
+        this.endTime = Date.now() + time;
+      }
+    },
+
+
     /**
      * Start to countdown.
      * @public
@@ -220,7 +249,7 @@ var index = {
      * @emits Countdown#countdownprogress
      */
     step: function step() {
-      var _this = this;
+      var _this2 = this;
 
       if (!this.counting) {
         return;
@@ -242,10 +271,11 @@ var index = {
 
 
         this.timeout = setTimeout(function () {
-          _this.count -= interval;
-          _this.step();
+          _this2.count -= interval;
+          _this2.step();
         }, interval);
       } else {
+        this.count = 0;
         this.stop();
       }
     },
@@ -257,7 +287,8 @@ var index = {
      * @emits Countdown#countdownend
      */
     stop: function stop() {
-      this.destroy();
+      this.counting = false;
+      this.timeout = undefined;
 
       /**
        * Countdown end event.
@@ -268,12 +299,11 @@ var index = {
 
 
     /**
-     * Destroy the countdown.
+     * Update the count.
      * @private
      */
-    destroy: function destroy() {
-      this.counting = false;
-      clearTimeout(this.timeout);
+    update: function update() {
+      this.count = Math.max(0, this.endTime - Date.now());
     }
   }
 };

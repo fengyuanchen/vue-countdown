@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 (Oct 9, 2017)
+
+- Added a new property: `leadingZero` (#5).
+- Fixed the issue of countdown process when document hidden (#8).
+
 ## 0.3.0 (Sep 18, 2017)
 
 - Added 4 new scope properties: `totalDays`, `totalHours`, `totalMinutes` and `totalSeconds` (#1).
