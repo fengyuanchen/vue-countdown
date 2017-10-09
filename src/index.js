@@ -44,6 +44,14 @@ export default {
     },
 
     /**
+     * Add a leading zero to the output numbers if they are less than 10.
+     */
+    leadingZero: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Total number of time (in milliseconds) for the countdown.
      */
     time: {
@@ -140,12 +148,14 @@ export default {
   },
 
   render(createElement) {
+    const preprocess = value => (this.leadingZero && value < 10 ? `0${value}` : value);
+
     return createElement(this.tag, this.$scopedSlots.default ? [
       this.$scopedSlots.default({
-        days: this.days,
-        hours: this.hours,
-        minutes: this.minutes,
-        seconds: this.seconds,
+        days: preprocess(this.days),
+        hours: preprocess(this.hours),
+        minutes: preprocess(this.minutes),
+        seconds: preprocess(this.seconds),
         totalDays: this.totalDays,
         totalHours: this.totalHours,
         totalMinutes: this.totalMinutes,
