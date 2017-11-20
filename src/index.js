@@ -274,7 +274,9 @@ export default {
      * @private
      */
     update() {
-      this.count = Math.max(0, this.endTime - Date.now());
+      if (this.counting) {
+        this.count = Math.max(0, this.endTime - Date.now());
+      }
     },
   },
 };
