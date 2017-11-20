@@ -54,19 +54,19 @@ Vue.component('countdown', VueCountdown);
 
 ## Props
 
-### autoStart
+### auto-start
 
 - Type: `Boolean`
 - Default: `true`
 
 Start to countdown automatically when initialized.
 
-### leadingZero
+### emit-events
 
 - Type: `Boolean`
 - Default: `true`
 
-Add a leading zero to the output days, hours, minutes and seconds if they are less than 10.
+Indicate if emit [the countdown events](#events) or not.
 
 ### interval
 
@@ -75,9 +75,19 @@ Add a leading zero to the output days, hours, minutes and seconds if they are le
 
 Update interval time (in milliseconds) of the countdown.
 
-```html
-<countdown v-bind:interval="100"></countdown>
-```
+### leading-zero
+
+- Type: `Boolean`
+- Default: `true`
+
+Add a leading zero to the output days, hours, minutes and seconds if they are less than 10.
+
+### now
+
+- Type: `Function`
+- Default: `() => Date.now()`
+
+Generate the current time (in milliseconds) of a specific time zone.
 
 ### time
 
@@ -118,6 +128,8 @@ export default {
 Stop the countdown.
 
 ## Events
+
+> Require to set the [`emit-events`](#emit-events) property to `true`.
 
 ### countdownstart
 

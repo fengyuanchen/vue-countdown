@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0 (Nov 20, 2017)
+
+- Added 2 new property: `emitEvents` (#11) and `now` (#12).
+- Fixed the issue of count number update when it it not started (#13).
+
 ## 0.4.0 (Oct 9, 2017)
 
 - Added a new property: `leadingZero` (#5).

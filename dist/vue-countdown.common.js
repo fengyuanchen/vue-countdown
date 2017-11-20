@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v0.4.0
+ * vue-countdown v0.5.0
  * https://github.com/xkeshi/vue-countdown
  *
  * Copyright (c) 2017 Xkeshi
  * Released under the MIT license
  *
- * Date: 2017-10-09T07:10:09.418Z
+ * Date: 2017-11-20T03:10:33.102Z
  */
 
 'use strict';
@@ -34,7 +34,7 @@ var index = {
        * The absolute end time.
        * @type {number}
        */
-      endTime: Date.now()
+      endTime: 0
     };
   },
 
@@ -44,6 +44,14 @@ var index = {
      * Start to countdown automatically when initialized.
      */
     autoStart: {
+      type: Boolean,
+      default: true
+    },
+
+    /**
+     * Indicate if emit the countdown events or not.
+     */
+    emitEvents: {
       type: Boolean,
       default: true
     },
@@ -62,6 +70,16 @@ var index = {
     leadingZero: {
       type: Boolean,
       default: true
+    },
+
+    /**
+     * Generate the current time of a specific time zone.
+     */
+    now: {
+      type: Function,
+      default: function _default() {
+        return Date.now();
+      }
     },
 
     /**
@@ -220,7 +238,7 @@ var index = {
 
       if (time > 0) {
         this.count = time;
-        this.endTime = Date.now() + time;
+        this.endTime = this.now() + time;
       }
     },
 
@@ -235,11 +253,14 @@ var index = {
         return;
       }
 
-      /**
-       * Countdown start event.
-       * @event Countdown#countdownstart
-       */
-      this.$emit('countdownstart');
+      if (this.emitEvents) {
+        /**
+         * Countdown start event.
+         * @event Countdown#countdownstart
+         */
+        this.$emit('countdownstart');
+      }
+
       this.counting = true;
       this.step();
     },
@@ -257,16 +278,18 @@ var index = {
         return;
       }
 
-      /**
-       * Countdown progress event.
-       * @event Countdown#countdownprogress
-       */
-      this.$emit('countdownprogress', {
-        days: this.days,
-        hours: this.hours,
-        minutes: this.minutes,
-        seconds: this.seconds
-      });
+      if (this.emitEvents) {
+        /**
+         * Countdown progress event.
+         * @event Countdown#countdownprogress
+         */
+        this.$emit('countdownprogress', {
+          days: this.days,
+          hours: this.hours,
+          minutes: this.minutes,
+          seconds: this.seconds
+        });
+      }
 
       if (this.count > 0) {
         var interval = this.interval;
@@ -292,11 +315,13 @@ var index = {
       this.counting = false;
       this.timeout = undefined;
 
-      /**
-       * Countdown end event.
-       * @event Countdown#countdownend
-       */
-      this.$emit('countdownend');
+      if (this.emitEvents) {
+        /**
+         * Countdown end event.
+         * @event Countdown#countdownend
+         */
+        this.$emit('countdownend');
+      }
     },
 
 
@@ -305,7 +330,9 @@ var index = {
      * @private
      */
     update: function update() {
-      this.count = Math.max(0, this.endTime - Date.now());
+      if (this.counting) {
+        this.count = Math.max(0, this.endTime - this.now());
+      }
     }
   }
 };
