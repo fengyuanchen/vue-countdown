@@ -22,7 +22,7 @@ export default {
        * The absolute end time.
        * @type {number}
        */
-      endTime: Date.now(),
+      endTime: 0,
     };
   },
 
@@ -49,6 +49,14 @@ export default {
     leadingZero: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Generate the current time of a specific time zone.
+     */
+    now: {
+      type: Function,
+      default: () => Date.now(),
     },
 
     /**
@@ -196,7 +204,7 @@ export default {
 
       if (time > 0) {
         this.count = time;
-        this.endTime = Date.now() + time;
+        this.endTime = this.now() + time;
       }
     },
 
@@ -275,7 +283,7 @@ export default {
      */
     update() {
       if (this.counting) {
-        this.count = Math.max(0, this.endTime - Date.now());
+        this.count = Math.max(0, this.endTime - this.now());
       }
     },
   },
