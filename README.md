@@ -68,8 +68,6 @@ Start to countdown automatically when initialized.
 
 Indicate if emit [the countdown events](#events) or not.
 
-> If you don't need these events, you can set this prop to `false` for better performance.
-
 ### interval
 
 - Type: `Number`
@@ -131,7 +129,7 @@ Stop the countdown.
 
 ## Events
 
-> Require to set the [`emit-events`](#emit-events) property to `true`.
+> Require to set the [`emit-events`](#emit-events) property to `true`, or if you don't need these events, you can set the prop to `false` for better performance.
 
 ### countdownstart
 
