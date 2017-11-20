@@ -68,6 +68,8 @@ Start to countdown automatically when initialized.
 
 Indicate if emit [the countdown events](#events) or not.
 
+> If you don't need these events, you can set this prop to `false` for better performance.
+
 ### interval
 
 - Type: `Number`
