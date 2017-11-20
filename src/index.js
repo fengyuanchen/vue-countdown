@@ -36,6 +36,14 @@ export default {
     },
 
     /**
+     * Indicate if emit the countdown events or not.
+     */
+    emitEvents: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Update interval time (in milliseconds) of the countdown.
      */
     interval: {
@@ -218,11 +226,14 @@ export default {
         return;
       }
 
-      /**
-       * Countdown start event.
-       * @event Countdown#countdownstart
-       */
-      this.$emit('countdownstart');
+      if (this.emitEvents) {
+        /**
+         * Countdown start event.
+         * @event Countdown#countdownstart
+         */
+        this.$emit('countdownstart');
+      }
+
       this.counting = true;
       this.step();
     },
@@ -237,16 +248,18 @@ export default {
         return;
       }
 
-      /**
-       * Countdown progress event.
-       * @event Countdown#countdownprogress
-       */
-      this.$emit('countdownprogress', {
-        days: this.days,
-        hours: this.hours,
-        minutes: this.minutes,
-        seconds: this.seconds,
-      });
+      if (this.emitEvents) {
+        /**
+         * Countdown progress event.
+         * @event Countdown#countdownprogress
+         */
+        this.$emit('countdownprogress', {
+          days: this.days,
+          hours: this.hours,
+          minutes: this.minutes,
+          seconds: this.seconds,
+        });
+      }
 
       if (this.count > 0) {
         const { interval } = this;
@@ -270,11 +283,13 @@ export default {
       this.counting = false;
       this.timeout = undefined;
 
-      /**
-       * Countdown end event.
-       * @event Countdown#countdownend
-       */
-      this.$emit('countdownend');
+      if (this.emitEvents) {
+        /**
+         * Countdown end event.
+         * @event Countdown#countdownend
+         */
+        this.$emit('countdownend');
+      }
     },
 
     /**
