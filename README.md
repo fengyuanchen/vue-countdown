@@ -45,7 +45,7 @@ Vue.component('countdown', VueCountdown);
 
 ```html
 <countdown :time="2 * 24 * 60 * 60 * 1000">
-  <template scope="props">Time Remaining：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
+  <template slot-scope="props">Time Remaining：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
 </countdown>
 <!-- <span>Time Remaining：01 days, 23 hours, 59 minutes, 59 seconds.</span> -->
 ```

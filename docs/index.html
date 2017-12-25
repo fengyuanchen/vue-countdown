@@ -41,14 +41,14 @@
     <hr>
     <div id="app">
       <countdown :time="time" :interval="100" tag="p">
-        <template scope="props">New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
+        <template slot-scope="props">New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
       </countdown>
       <countdown :time="time" :interval="100" tag="p">
-        <template scope="props">Christmas Time Remaining: {{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds.</template>
+        <template slot-scope="props">Christmas Time Remaining: {{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds.</template>
       </countdown>
       <button type="button" class="btn btn-primary" :disabled="counting" @click="countdown">
         <countdown v-if="counting" :time="60000" @countdownend="countdownend">
-          <template scope="props">Fetch again {{ props.seconds > 0 ? props.seconds : 60 }} seconds later</template>
+          <template slot-scope="props">Fetch again {{ props.seconds > 0 ? props.seconds : 60 }} seconds later</template>
         </countdown>
         <span v-else>Fetch Verification Code</span>
       </button>
@@ -59,16 +59,16 @@
     <h6>HTML:</h6>
     <pre><code class="language-html">&lt;div id=&quot;app&quot;&gt;
   &lt;countdown :time=&quot;time&quot; :interval=&quot;100&quot; tag=&quot;p&quot;&gt;
-    &lt;template scope=&quot;props&quot;&gt;New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.&lt;/template&gt;
+    &lt;template slot-scope=&quot;props&quot;&gt;New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.&lt;/template&gt;
   &lt;/countdown&gt;
 
   &lt;countdown :time=&quot;time&quot; :interval=&quot;100&quot; tag=&quot;p&quot;&gt;
-    &lt;template scope=&quot;props&quot;&gt;Christmas Time Remaining：{{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds.&lt;/template&gt;
+    &lt;template slot-scope=&quot;props&quot;&gt;Christmas Time Remaining：{{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds.&lt;/template&gt;
   &lt;/countdown&gt;
 
   &lt;button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; :disabled=&quot;counting&quot; @click=&quot;countdown&quot;&gt;
     &lt;countdown v-if=&quot;counting&quot; :time=&quot;60000&quot; @countdownend=&quot;countdownend&quot;&gt;
-      &lt;template scope=&quot;props&quot;&gt;Fetch again {{ props.seconds || 60 }} seconds later&lt;/template&gt;
+      &lt;template slot-scope=&quot;props&quot;&gt;Fetch again {{ props.seconds || 60 }} seconds later&lt;/template&gt;
     &lt;/countdown&gt;
     &lt;span v-else&gt;Fetch Verification Code&lt;/span&gt;
   &lt;/button&gt;
@@ -108,7 +108,7 @@
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/vue@2.5.6/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script>
   <script src="https://unpkg.com/highlightjs@9.10.0/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <script src="js/vue-countdown.js"></script>
