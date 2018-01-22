@@ -185,10 +185,6 @@ export default {
   },
 
   mounted() {
-    if (this.autoStart) {
-      this.start();
-    }
-
     window.addEventListener('focus', (this.onFocus = this.update.bind(this)));
   },
 
@@ -213,6 +209,12 @@ export default {
       if (time > 0) {
         this.count = time;
         this.endTime = this.now() + time;
+
+        if (this.autoStart) {
+          this.$nextTick(() => {
+            this.start();
+          });
+        }
       }
     },
 
