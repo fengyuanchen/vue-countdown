@@ -1,5 +1,7 @@
 # vue-countdown
 
+[![Downloads](https://img.shields.io/npm/dm/@xkeshi/vue-countdown.svg)](https://www.npmjs.com/package/@xkeshi/vue-countdown) [![Version](https://img.shields.io/npm/v/@xkeshi/vue-countdown.svg)](https://www.npmjs.com/package/@xkeshi/vue-countdown)
+
 > Countdown component for [Vue.js](https://vuejs.org/).
 
 - [Website](https://xkeshi.github.io/vue-countdown)
