@@ -241,6 +241,27 @@ export default {
     },
 
     /**
+     * Pause countdown.
+     * @public
+     * @emits Countdown#countdownpause
+     */
+    pause() {
+      if (!this.counting) {
+        return;
+      }
+
+      if (this.emitEvents) {
+        /**
+         * Countdown pause event.
+         * @event Countdown#countdownpause
+         */
+        this.$emit("countdownpause");
+      }
+
+      this.counting = false;
+    },
+    
+    /**
      * Step to countdown.
      * @private
      * @emits Countdown#countdownprogress
