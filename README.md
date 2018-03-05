@@ -125,6 +125,22 @@ export default {
 };
 ```
 
+### pause
+
+Pause the countdown.
+
+```html
+<countdown v-bind:auto-start="false" ref="countdown"></countdown>
+```
+
+```js
+export default {
+  mounted() {
+    this.$refs.countdown.pause();
+  },
+};
+```
+
 ### stop
 
 Stop the countdown.
@@ -136,6 +152,10 @@ Stop the countdown.
 ### countdownstart
 
 This event fires when countdown started.
+
+### countdownpause
+
+This event fires when countdown is paused.
 
 ### countdownprogress
 
