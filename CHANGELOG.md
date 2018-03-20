@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0 (Mar 20, 2018)
+
+- Added a new method (`pause`) and a new event (`countdownpause`) (#16).
+
 ## 0.5.0 (Nov 20, 2017)
 
 - Added 2 new property: `emitEvents` (#11) and `now` (#12).
