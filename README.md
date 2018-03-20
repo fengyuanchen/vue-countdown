@@ -130,7 +130,7 @@ export default {
 Pause the countdown.
 
 ```html
-<countdown v-bind:auto-start="false" ref="countdown"></countdown>
+<countdown ref="countdown"></countdown>
 ```
 
 ```js
