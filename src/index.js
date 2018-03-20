@@ -255,12 +255,12 @@ export default {
          * Countdown pause event.
          * @event Countdown#countdownpause
          */
-        this.$emit("countdownpause");
+        this.$emit('countdownpause');
       }
 
       this.counting = false;
     },
-    
+
     /**
      * Step to countdown.
      * @private
