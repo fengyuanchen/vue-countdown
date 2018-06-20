@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0 (Jun 20, 2018)
+
+- Refactor the source code.
+- Add `totalDays`, `totalHours`, `totalMinutes` and `totalSeconds` properties to the data of the `countdownprogress` event.
+- Add unit test.
+
 ## 0.6.0 (Mar 20, 2018)
 
 - Added a new method (`pause`) and a new event (`countdownpause`) (#16).

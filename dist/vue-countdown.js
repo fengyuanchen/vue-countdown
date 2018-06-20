@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v0.6.0
- * https://github.com/xkeshi/vue-countdown
+ * vue-countdown v1.0.0
+ * https://xkeshi.github.io/vue-countdown
  *
- * Copyright (c) 2018 Xkeshi
+ * Copyright 2017-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2018-03-20T07:26:21.806Z
+ * Date: 2018-06-20T03:25:59.583Z
  */
 
 (function (global, factory) {
@@ -20,6 +20,8 @@
   var MILLISECONDS_DAY = 24 * MILLISECONDS_HOUR;
 
   var index = {
+    name: 'countdown',
+
     data: function data() {
       return {
         /**
@@ -92,7 +94,6 @@
       time: {
         type: Number,
         default: 0,
-        required: true,
         validator: function validator(value) {
           return value >= 0;
         }
@@ -145,11 +146,11 @@
         var seconds = this.count % MILLISECONDS_MINUTE / MILLISECONDS_SECOND;
 
         if (interval < 10) {
-          return seconds.toFixed(3);
+          return parseFloat(seconds.toFixed(3));
         } else if (interval >= 10 && interval < 100) {
-          return seconds.toFixed(2);
+          return parseFloat(seconds.toFixed(2));
         } else if (interval >= 100 && interval < 1000) {
-          return seconds.toFixed(1);
+          return parseFloat(seconds.toFixed(1));
         }
 
         return Math.floor(seconds);
@@ -188,7 +189,19 @@
        * @returns {number}
        */
       totalSeconds: function totalSeconds() {
-        return Math.floor(this.count / MILLISECONDS_SECOND);
+        var interval = this.interval;
+
+        var seconds = this.count / MILLISECONDS_SECOND;
+
+        if (interval < 10) {
+          return parseFloat(seconds.toFixed(3));
+        } else if (interval >= 10 && interval < 100) {
+          return parseFloat(seconds.toFixed(2));
+        } else if (interval >= 100 && interval < 1000) {
+          return parseFloat(seconds.toFixed(1));
+        }
+
+        return Math.floor(seconds);
       }
     },
 
@@ -204,29 +217,13 @@
         hours: preprocess(this.hours),
         minutes: preprocess(this.minutes),
         seconds: preprocess(this.seconds),
-        totalDays: this.totalDays,
-        totalHours: this.totalHours,
-        totalMinutes: this.totalMinutes,
-        totalSeconds: this.totalSeconds
+        totalDays: preprocess(this.totalDays),
+        totalHours: preprocess(this.totalHours),
+        totalMinutes: preprocess(this.totalMinutes),
+        totalSeconds: preprocess(this.totalSeconds)
       })] : this.$slots.default);
     },
-    created: function created() {
-      this.init();
-    },
-    mounted: function mounted() {
-      window.addEventListener('focus', this.onFocus = this.update.bind(this));
-    },
-    beforeDestroy: function beforeDestroy() {
-      window.removeEventListener('focus', this.onFocus);
-      clearTimeout(this.timeout);
-    },
 
-
-    watch: {
-      time: function time() {
-        this.init();
-      }
-    },
 
     methods: {
       /**
@@ -270,7 +267,7 @@
         }
 
         this.counting = true;
-        this.step();
+        this.next();
       },
 
 
@@ -293,6 +290,16 @@
         }
 
         this.counting = false;
+        clearTimeout(this.timeout);
+      },
+
+
+      /**
+       * Next countdown queue.
+       * @private
+       */
+      next: function next() {
+        this.timeout = setTimeout(this.step.bind(this), this.interval);
       },
 
 
@@ -302,33 +309,31 @@
        * @emits Countdown#countdownprogress
        */
       step: function step() {
-        var _this3 = this;
-
         if (!this.counting) {
           return;
         }
 
-        if (this.emitEvents) {
-          /**
-           * Countdown progress event.
-           * @event Countdown#countdownprogress
-           */
-          this.$emit('countdownprogress', {
-            days: this.days,
-            hours: this.hours,
-            minutes: this.minutes,
-            seconds: this.seconds
-          });
-        }
-
         if (this.count > 0) {
-          var interval = this.interval;
+          this.count -= this.interval;
 
+          if (this.emitEvents && this.count > 0) {
+            /**
+             * Countdown progress event.
+             * @event Countdown#countdownprogress
+             */
+            this.$emit('countdownprogress', {
+              days: this.days,
+              hours: this.hours,
+              minutes: this.minutes,
+              seconds: this.seconds,
+              totalDays: this.totalDays,
+              totalHours: this.totalHours,
+              totalMinutes: this.totalMinutes,
+              totalSeconds: this.totalSeconds
+            });
+          }
 
-          this.timeout = setTimeout(function () {
-            _this3.count -= interval;
-            _this3.step();
-          }, interval);
+          this.next();
         } else {
           this.count = 0;
           this.stop();
@@ -343,6 +348,7 @@
        */
       stop: function stop() {
         this.counting = false;
+        clearTimeout(this.timeout);
         this.timeout = undefined;
 
         if (this.emitEvents) {
@@ -364,6 +370,23 @@
           this.count = Math.max(0, this.endTime - this.now());
         }
       }
+    },
+
+    watch: {
+      time: function time() {
+        this.init();
+      }
+    },
+
+    created: function created() {
+      this.init();
+    },
+    mounted: function mounted() {
+      window.addEventListener('focus', this.onFocus = this.update.bind(this));
+    },
+    beforeDestroy: function beforeDestroy() {
+      window.removeEventListener('focus', this.onFocus);
+      clearTimeout(this.timeout);
     }
   };
 

@@ -1,6 +1,6 @@
 # vue-countdown
 
-[![Downloads](https://img.shields.io/npm/dm/@xkeshi/vue-countdown.svg)](https://www.npmjs.com/package/@xkeshi/vue-countdown) [![Version](https://img.shields.io/npm/v/@xkeshi/vue-countdown.svg)](https://www.npmjs.com/package/@xkeshi/vue-countdown)
+[![Build Status](https://travis-ci.org/xkeshi/vue-countdown.svg)](https://travis-ci.org/xkeshi/vue-countdown) [![Downloads](https://img.shields.io/npm/dm/@xkeshi/vue-countdown.svg)](https://www.npmjs.com/package/@xkeshi/vue-countdown) [![Version](https://img.shields.io/npm/v/@xkeshi/vue-countdown.svg)](https://www.npmjs.com/package/@xkeshi/vue-countdown)
 
 > Countdown component for [Vue.js](https://vuejs.org/).
 
@@ -32,17 +32,23 @@ dist/
 ### Install
 
 ```shell
-npm install @xkeshi/vue-countdown
+npm install @xkeshi/vue-countdown vue
+```
+
+In browser:
+
+```html
+<script src="/path/to/vue.js"></script>
+<script src="/path/to/vue-countdown.js"></script>
 ```
 
 ### Usage
 
-- Browser: `window.VueCountdown`
-- CommonJS: `var VueCountdown = require('@xkeshi/vue-countdown')`
-- ES2015: `import VueCountdown from '@xkeshi/vue-countdown'`
-
 ```js
-Vue.component('countdown', VueCountdown);
+import Vue from 'vue';
+import VueCountdown from '@xkeshi/vue-countdown';
+
+Vue.component(VueCountdown.name, VueCountdown);
 ```
 
 ```html
@@ -50,6 +56,12 @@ Vue.component('countdown', VueCountdown);
   <template slot-scope="props">Time Remaining：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
 </countdown>
 <!-- <span>Time Remaining：01 days, 23 hours, 59 minutes, 59 seconds.</span> -->
+```
+
+In browser:
+
+```html
+<script>Vue.component(VueCountdown.name, VueCountdown);</script>
 ```
 
 [⬆ back to top](#table-of-contents)
@@ -162,17 +174,21 @@ This event fires when countdown is paused.
 This event fires when countdown in progress.
 
 ```html
-<countdown v-on:countdownprogress="onCountdownProgress"></countdown>
+<countdown v-on:countdownprogress="handleCountdownProgress"></countdown>
 ```
 
 ```js
 export default {
   methods: {
-    onCountdownProgress(data) {
+    handleCountdownProgress(data) {
       console.log(data.days);
       console.log(data.hours);
       console.log(data.minutes);
       console.log(data.seconds);
+      console.log(data.totalDays);
+      console.log(data.totalHours);
+      console.log(data.totalMinutes);
+      console.log(data.totalSeconds);
     },
   },
 };
@@ -199,6 +215,6 @@ Maintained under the [Semantic Versioning guidelines](http://semver.org/).
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Xkeshi](http://xkeshi.com)
+[MIT](https://opensource.org/licenses/MIT) © [Xkeshi](http://xkeshi.com)
 
 [⬆ back to top](#table-of-contents)
