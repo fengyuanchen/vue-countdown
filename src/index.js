@@ -4,6 +4,8 @@ const MILLISECONDS_HOUR = 60 * MILLISECONDS_MINUTE;
 const MILLISECONDS_DAY = 24 * MILLISECONDS_HOUR;
 
 export default {
+  name: 'countdown',
+
   data() {
     return {
       /**
@@ -73,7 +75,6 @@ export default {
     time: {
       type: Number,
       default: 0,
-      required: true,
       validator: value => value >= 0,
     },
 
@@ -120,11 +121,11 @@ export default {
       const seconds = (this.count % MILLISECONDS_MINUTE) / MILLISECONDS_SECOND;
 
       if (interval < 10) {
-        return seconds.toFixed(3);
+        return parseFloat(seconds.toFixed(3));
       } else if (interval >= 10 && interval < 100) {
-        return seconds.toFixed(2);
+        return parseFloat(seconds.toFixed(2));
       } else if (interval >= 100 && interval < 1000) {
-        return seconds.toFixed(1);
+        return parseFloat(seconds.toFixed(1));
       }
 
       return Math.floor(seconds);
@@ -159,7 +160,18 @@ export default {
      * @returns {number}
      */
     totalSeconds() {
-      return Math.floor(this.count / MILLISECONDS_SECOND);
+      const { interval } = this;
+      const seconds = this.count / MILLISECONDS_SECOND;
+
+      if (interval < 10) {
+        return parseFloat(seconds.toFixed(3));
+      } else if (interval >= 10 && interval < 100) {
+        return parseFloat(seconds.toFixed(2));
+      } else if (interval >= 100 && interval < 1000) {
+        return parseFloat(seconds.toFixed(1));
+      }
+
+      return Math.floor(seconds);
     },
   },
 
@@ -172,31 +184,12 @@ export default {
         hours: preprocess(this.hours),
         minutes: preprocess(this.minutes),
         seconds: preprocess(this.seconds),
-        totalDays: this.totalDays,
-        totalHours: this.totalHours,
-        totalMinutes: this.totalMinutes,
-        totalSeconds: this.totalSeconds,
+        totalDays: preprocess(this.totalDays),
+        totalHours: preprocess(this.totalHours),
+        totalMinutes: preprocess(this.totalMinutes),
+        totalSeconds: preprocess(this.totalSeconds),
       }),
     ] : this.$slots.default);
-  },
-
-  created() {
-    this.init();
-  },
-
-  mounted() {
-    window.addEventListener('focus', (this.onFocus = this.update.bind(this)));
-  },
-
-  beforeDestroy() {
-    window.removeEventListener('focus', this.onFocus);
-    clearTimeout(this.timeout);
-  },
-
-  watch: {
-    time() {
-      this.init();
-    },
   },
 
   methods: {
@@ -237,7 +230,7 @@ export default {
       }
 
       this.counting = true;
-      this.step();
+      this.next();
     },
 
     /**
@@ -259,6 +252,15 @@ export default {
       }
 
       this.counting = false;
+      clearTimeout(this.timeout);
+    },
+
+    /**
+     * Next countdown queue.
+     * @private
+     */
+    next() {
+      this.timeout = setTimeout(this.step.bind(this), this.interval);
     },
 
     /**
@@ -271,26 +273,27 @@ export default {
         return;
       }
 
-      if (this.emitEvents) {
-        /**
-         * Countdown progress event.
-         * @event Countdown#countdownprogress
-         */
-        this.$emit('countdownprogress', {
-          days: this.days,
-          hours: this.hours,
-          minutes: this.minutes,
-          seconds: this.seconds,
-        });
-      }
-
       if (this.count > 0) {
-        const { interval } = this;
+        this.count -= this.interval;
 
-        this.timeout = setTimeout(() => {
-          this.count -= interval;
-          this.step();
-        }, interval);
+        if (this.emitEvents && this.count > 0) {
+          /**
+           * Countdown progress event.
+           * @event Countdown#countdownprogress
+           */
+          this.$emit('countdownprogress', {
+            days: this.days,
+            hours: this.hours,
+            minutes: this.minutes,
+            seconds: this.seconds,
+            totalDays: this.totalDays,
+            totalHours: this.totalHours,
+            totalMinutes: this.totalMinutes,
+            totalSeconds: this.totalSeconds,
+          });
+        }
+
+        this.next();
       } else {
         this.count = 0;
         this.stop();
@@ -304,6 +307,7 @@ export default {
      */
     stop() {
       this.counting = false;
+      clearTimeout(this.timeout);
       this.timeout = undefined;
 
       if (this.emitEvents) {
@@ -324,5 +328,24 @@ export default {
         this.count = Math.max(0, this.endTime - this.now());
       }
     },
+  },
+
+  watch: {
+    time() {
+      this.init();
+    },
+  },
+
+  created() {
+    this.init();
+  },
+
+  mounted() {
+    window.addEventListener('focus', (this.onFocus = this.update.bind(this)));
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('focus', this.onFocus);
+    clearTimeout(this.timeout);
   },
 };
