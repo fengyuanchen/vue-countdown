@@ -1,44 +1,41 @@
 const babel = require('rollup-plugin-babel');
-const commonjs = require('rollup-plugin-commonjs');
-const nodeResolve = require('rollup-plugin-node-resolve');
+const changeCase = require('change-case');
+const createBanner = require('create-banner');
 const pkg = require('./package');
 
-const now = new Date();
-const banner = `/*!
- * vue-countdown v${pkg.version}
- * https://github.com/${pkg.repository}
- *
- * Copyright (c) ${now.getFullYear()} Xkeshi
- * Released under the ${pkg.license} license
- *
- * Date: ${now.toISOString()}
- */
-`;
+pkg.name = pkg.name.replace(/^.+\//, '');
 
-export default {
+const name = changeCase.pascalCase(pkg.name);
+const banner = createBanner({
+  data: {
+    year: '2017-present',
+  },
+});
+
+module.exports = {
   input: 'src/index.js',
   output: [
     {
       banner,
-      file: 'dist/vue-countdown.js',
+      name,
+      file: `dist/${pkg.name}.js`,
       format: 'umd',
-      name: 'VueCountdown',
     },
     {
       banner,
-      file: 'dist/vue-countdown.common.js',
+      file: `dist/${pkg.name}.common.js`,
       format: 'cjs',
     },
     {
       banner,
-      file: 'dist/vue-countdown.esm.js',
-      format: 'es',
+      file: `dist/${pkg.name}.esm.js`,
+      format: 'esm',
     },
     {
       banner,
-      file: 'docs/js/vue-countdown.js',
+      name,
+      file: `docs/js/${pkg.name}.js`,
       format: 'umd',
-      name: 'VueCountdown',
     },
   ],
   plugins: [
