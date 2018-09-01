@@ -273,7 +273,7 @@ export default {
         return;
       }
 
-      if (this.count > 0) {
+      if (this.count > this.interval) {
         this.count -= this.interval;
 
         if (this.emitEvents && this.count > 0) {
