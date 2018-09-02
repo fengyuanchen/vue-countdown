@@ -73,57 +73,57 @@ In browser:
 - Type: `Boolean`
 - Default: `true`
 
-Start to countdown automatically when initialized.
+Starts the countdown automatically, when initialized.
 
 ### emit-events
 
 - Type: `Boolean`
 - Default: `true`
 
-Indicate if emit [the countdown events](#events) or not.
+Indicates, if the component should emit [the countdown events](#events).
 
 ### interval
 
 - Type: `Number`
 - Default: `1000`
 
-Update interval time (in milliseconds) of the countdown.
+Updates the interval time (in milliseconds) of the countdown.
 
 ### leading-zero
 
 - Type: `Boolean`
 - Default: `true`
 
-Add a leading zero to the output days, hours, minutes and seconds if they are less than 10.
+Adds a leading zero to the output of days, hours, minutes and seconds, if they are single-digit.
 
 ### now
 
 - Type: `Function`
 - Default: `() => Date.now()`
 
-Generate the current time (in milliseconds) of a specific time zone.
+Generates the current time (in milliseconds) in a specific time zone.
 
 ### time
 
 - Type: `Number`
 - Default: `0`
 
-Total number of time (in milliseconds) for the countdown.
+The time (in milliseconds) the component should count down from.
 
-**Note:** The given value should not less than `0`.
+**Note:** The value should not be less than `0`.
 
 ### tag
 
 - Type: `String`
 - Default: `'span'`
 
-The tag of the component root element in the countdown.
+The tag name of the component's root element.
 
 ## Methods
 
 ### start
 
-Start to countdown.
+Start the countdown.
 
 ```html
 <countdown v-bind:auto-start="false" ref="countdown"></countdown>
@@ -156,22 +156,33 @@ export default {
 ### stop
 
 Stop the countdown.
+```html
+<countdown ref="countdown"></countdown>
+```
+
+```js
+export default {
+  mounted() {
+    this.$refs.countdown.stop();
+  },
+};
+```
 
 ## Events
 
-> Require to set the [`emit-events`](#emit-events) property to `true`, or if you don't need these events, you can set the prop to `false` for better performance.
+> You have to set the [`emit-events`](#emit-events) property to `true` to be able use these events. If you don't need them, you can set the property to `false` for better performance.
 
 ### countdownstart
 
-This event fires when countdown started.
+This event fires when the countdown starts.
 
 ### countdownpause
 
-This event fires when countdown is paused.
+This event fires when the countdown is paused.
 
 ### countdownprogress
 
-This event fires when countdown in progress.
+This event fires when the countdown is in progress.
 
 ```html
 <countdown v-on:countdownprogress="handleCountdownProgress"></countdown>
@@ -196,7 +207,7 @@ export default {
 
 ### countdownend
 
-This event fires when countdown stopped.
+This event fires when the countdown stops.
 
 [⬆ back to top](#table-of-contents)
 
