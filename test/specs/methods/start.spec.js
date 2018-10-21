@@ -1,0 +1,47 @@
+describe('method#start', () => {
+  it('should start the countdown', (done) => {
+    new Vue({
+      template: '<countdown ref="countdown" :time="2000" :auto-start="false" @start="handleCountdownStart"></countdown>',
+      methods: {
+        handleCountdownStart() {
+          expect(this.$refs.countdown.counting).to.be.true;
+          done();
+        },
+      },
+      mounted() {
+        setTimeout(() => {
+          expect(this.$refs.countdown.counting).to.be.false;
+          this.$refs.countdown.start();
+        }, 100);
+      },
+    }).$mount();
+  });
+
+  it('should only start once when call the method more than once at the same time', (done) => {
+    let count = 0;
+
+    new Vue({
+      template: '<countdown ref="countdown" :time="2000" :auto-start="false" @start="handleCountdownStart"></countdown>',
+      methods: {
+        handleCountdownStart() {
+          count += 1;
+
+          if (count > 1) {
+            expect.fail(1, 0);
+            return;
+          }
+
+          setTimeout(done, 100);
+        },
+      },
+      mounted() {
+        setTimeout(() => {
+          this.$refs.countdown.start();
+
+          // XXX: Call the `start` method again
+          this.$refs.countdown.start();
+        }, 100);
+      },
+    }).$mount();
+  });
+});

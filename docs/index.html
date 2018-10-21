@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Countdown component for Vue.js.">
+  <meta name="author" content="Chen Fengyuan">
+  <title>vue-countdown</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/highlightjs@9.10.0/styles/github.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="navbar navbar-light navbar-expand-md">
+    <nav class="container">
+      <a class="navbar-brand" href="./">vue-countdown</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbar-collapse" role="navigation">
+        <nav class="nav navbar-nav">
+          <a class="nav-link" href="https://github.com/fengyuanchen/vue-countdown/blob/master/README.md">Docs</a>
+          <a class="nav-link" href="https://github.com/fengyuanchen/vue-countdown" title="View the GitHub project">GitHub</a>
+          <a class="nav-link" href="https://fengyuanchen.github.io" title="More projects">More</a>
+          <a class="nav-link" href="https://chenfengyuan.com" title="About the author">About</a>
+        </nav>
+      </div>
+    </nav>
+  </header>
+
+  <div class="jumbotron rounded-0 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+          <div class="col-md">
+            <h1>vue-countdown <small class="h6">v1.0.0</small></h1>
+            <p class="lead">Countdown component for Vue.js.</p>
+          </div>
+          <div class="col-md">
+            <div class="carbonads">
+              <script id="_carbonads_js" src="//cdn.carbonads.com/carbon.js?serve=CKYI55Q7&placement=fengyuanchengithubio" async></script>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="container">
+    <h3>Examples</h3>
+    <hr>
+    <div id="app">
+      <countdown :time="time" :interval="100" tag="p">
+        <template slot-scope="props">New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }}.{{ Math.floor(props.milliseconds / 100) }} seconds.</template>
+      </countdown>
+      <countdown :time="time" tag="p">
+        <template slot-scope="props">Christmas Time Remaining: {{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds / {{ props.totalMilliseconds }} milliseconds.</template>
+      </countdown>
+      <button type="button" class="btn btn-primary" :disabled="counting" @click="startCountdown">
+        <countdown v-if="counting" :time="60000" @end="handleCountdownEnd">
+          <template slot-scope="props">Fetch again {{ props.totalSeconds }} seconds later</template>
+        </countdown>
+        <span v-else>Fetch Verification Code</span>
+      </button>
+    </div>
+    <p class="count"></p>
+    <br>
+
+    <h6>HTML:</h6>
+    <pre><code class="language-html">&lt;div id=&quot;app&quot;&gt;
+  &lt;countdown :time=&quot;time&quot; :interval=&quot;100&quot; tag=&quot;p&quot;&gt;
+    &lt;template slot-scope=&quot;props&quot;&gt;New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }}.{{ Math.floor(props.milliseconds / 100) }} seconds.&lt;/template&gt;
+  &lt;/countdown&gt;
+
+  &lt;countdown :time=&quot;time&quot; tag=&quot;p&quot;&gt;
+    &lt;template slot-scope=&quot;props&quot;&gt;Christmas Time Remaining：{{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds.&lt;/template&gt;
+  &lt;/countdown&gt;
+
+  &lt;button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; :disabled=&quot;counting&quot; @click=&quot;startCountdown&quot;&gt;
+    &lt;countdown v-if=&quot;counting&quot; :time=&quot;60000&quot; @end=&quot;handleCountdownEnd&quot;&gt;
+      &lt;template slot-scope=&quot;props&quot;&gt;Fetch again {{ props.totalSeconds }} seconds later&lt;/template&gt;
+    &lt;/countdown&gt;
+    &lt;span v-else&gt;Fetch Verification Code&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+    <h6>JavaScript:</h6>
+    <pre><code class="language-js">window.onload = function () {
+    Vue.component(VueCountdown.name, VueCountdown);
+
+    new Vue({
+      el: '#app',
+      data: function () {
+        var now = new Date();
+        var newYear = new Date(now.getFullYear() + 1, 0, 1);
+
+        return {
+          counting: false,
+          time: newYear - now,
+        };
+      },
+      methods: {
+        startCountdown: function () {
+          this.counting = true;
+        },
+        handleCountdownEnd: function () {
+          this.counting = false;
+        },
+      }
+    });
+  };</code></pre>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="heart"></p>
+      <nav class="nav flex-wrap justify-content-center mb-3">
+        <a class="nav-link" href="https://github.com/fengyuanchen/vue-countdown">GitHub</a>
+        <a class="nav-link" href="https://github.com/fengyuanchen/vue-countdown/blob/master/LICENSE">License</a>
+        <a class="nav-link" href="https://chenfengyuan.com">About</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/highlightjs@9.10.0/highlight.pack.js"></script>
+  <script src="https://fengyuanchen.github.io/js/common.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script src="js/vue-countdown.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

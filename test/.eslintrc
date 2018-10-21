@@ -1,0 +1,14 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "expect": true,
+    "Vue": true,
+    "VueCountdown": true
+  },
+  "rules": {
+    "no-new": "off",
+    "no-unused-expressions": "off"
+  }
+}
