@@ -46,6 +46,7 @@
     "babel-plugin-istanbul": "^5.1.0",
     "chai": "^4.2.0",
     "change-case": "^3.0.2",
+    "codecov": "^3.1.0",
     "create-banner": "^1.0.0",
     "cross-env": "^5.2.0",
     "del-cli": "^1.1.0",
