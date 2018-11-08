@@ -8,10 +8,8 @@ describe('method#abort', () => {
         },
       },
       mounted() {
-        setTimeout(() => {
-          this.$refs.countdown.abort();
-          setTimeout(done, 200);
-        }, 100);
+        this.$refs.countdown.abort();
+        setTimeout(done, 200);
       },
     }).$mount();
   });
@@ -34,12 +32,10 @@ describe('method#abort', () => {
         },
       },
       mounted() {
-        setTimeout(() => {
-          this.$refs.countdown.abort();
+        this.$refs.countdown.abort();
 
-          // XXX: Call the `abort` method again
-          this.$refs.countdown.abort();
-        }, 100);
+        // XXX: Call the `abort` method again
+        this.$refs.countdown.abort();
       },
     }).$mount();
   });

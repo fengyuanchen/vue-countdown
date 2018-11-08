@@ -9,9 +9,7 @@ describe('method#end', () => {
         },
       },
       mounted() {
-        setTimeout(() => {
-          this.$refs.countdown.end();
-        }, 100);
+        this.$refs.countdown.end();
       },
     }).$mount();
   });
@@ -35,12 +33,10 @@ describe('method#end', () => {
       },
 
       mounted() {
-        setTimeout(() => {
-          this.$refs.countdown.end();
+        this.$refs.countdown.end();
 
-          // XXX: Call the `end` method again
-          this.$refs.countdown.end();
-        }, 100);
+        // XXX: Call the `end` method again
+        this.$refs.countdown.end();
       },
     }).$mount();
   });

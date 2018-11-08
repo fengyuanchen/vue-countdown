@@ -4,9 +4,11 @@ describe('event#start', () => {
       template: '<countdown ref="countdown" :time="2000" :interval="100" @start="handleCountdownStart"></countdown>',
       methods: {
         handleCountdownStart() {
-          expect(this.$refs.countdown.totalMilliseconds).to.equal(2000);
-          expect(this.$refs.countdown.counting).to.be.true;
-          done();
+          this.$nextTick(() => {
+            expect(this.$refs.countdown.totalMilliseconds).to.equal(2000);
+            expect(this.$refs.countdown.counting).to.be.true;
+            done();
+          });
         },
       },
     }).$mount();

@@ -16,10 +16,7 @@ describe('prop#auto-start', () => {
       mounted() {
         expect(this.$refs.countdown.autoStart).to.be.false;
         expect(this.$refs.countdown.counting).to.be.false;
-        setTimeout(() => {
-          expect(this.$refs.countdown.counting).to.be.false;
-          done();
-        }, 100);
+        done();
       },
     }).$mount();
   });

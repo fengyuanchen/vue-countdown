@@ -44,10 +44,8 @@ describe('Countdown', () => {
         },
       },
       mounted() {
-        setTimeout(() => {
-          this.$refs.countdown.continue();
-          setTimeout(done, 200);
-        }, 100);
+        this.$refs.countdown.continue();
+        setTimeout(done, 200);
       },
     }).$mount();
   });
@@ -61,10 +59,8 @@ describe('Countdown', () => {
         },
       },
       mounted() {
-        setTimeout(() => {
-          this.$refs.countdown.progress();
-          setTimeout(done, 200);
-        }, 100);
+        this.$refs.countdown.progress();
+        setTimeout(done, 200);
       },
     }).$mount();
   });

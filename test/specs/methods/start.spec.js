@@ -9,10 +9,8 @@ describe('method#start', () => {
         },
       },
       mounted() {
-        setTimeout(() => {
-          expect(this.$refs.countdown.counting).to.be.false;
-          this.$refs.countdown.start();
-        }, 100);
+        expect(this.$refs.countdown.counting).to.be.false;
+        this.$refs.countdown.start();
       },
     }).$mount();
   });
@@ -35,12 +33,10 @@ describe('method#start', () => {
         },
       },
       mounted() {
-        setTimeout(() => {
-          this.$refs.countdown.start();
+        this.$refs.countdown.start();
 
-          // XXX: Call the `start` method again
-          this.$refs.countdown.start();
-        }, 100);
+        // XXX: Call the `start` method again
+        this.$refs.countdown.start();
       },
     }).$mount();
   });

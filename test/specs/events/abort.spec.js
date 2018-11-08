@@ -12,24 +12,21 @@ describe('event#abort', () => {
         },
       },
       mounted() {
-        setTimeout(() => {
-          this.$refs.countdown.abort();
-          setTimeout(done, 200);
-        }, 50);
+        this.$refs.countdown.abort();
+        setTimeout(done, 200);
       },
     }).$mount();
   });
 
   it('should not trigger the `abort` event when it is not started', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" @abort="handleCountdownAbort"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :auto-start="false" @abort="handleCountdownAbort"></countdown>',
       methods: {
         handleCountdownAbort() {
           expect.fail(1, 0);
         },
       },
       mounted() {
-        expect(this.$refs.countdown.counting).to.be.false;
         this.$refs.countdown.abort();
         setTimeout(done, 100);
       },
@@ -45,10 +42,8 @@ describe('event#abort', () => {
         },
       },
       mounted() {
-        setTimeout(() => {
-          this.$refs.countdown.abort();
-          done();
-        }, 100);
+        this.$refs.countdown.abort();
+        done();
       },
     }).$mount();
   });
