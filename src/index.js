@@ -166,16 +166,18 @@ export default {
   },
 
   watch: {
-    $prop: {
+    $props: {
       deep: true,
       immediate: true,
+
+      /**
+       * Update the countdown when props changed.
+       */
       handler() {
         this.totalMilliseconds = this.time;
 
         if (this.autoStart) {
-          this.$nextTick(() => {
-            this.start();
-          });
+          this.start();
         }
       },
     },

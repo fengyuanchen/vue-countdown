@@ -4,11 +4,8 @@ describe('prop#auto-start', () => {
       template: '<countdown ref="countdown" :time="2000"></countdown>',
       mounted() {
         expect(this.$refs.countdown.autoStart).to.be.true;
-        expect(this.$refs.countdown.counting).to.be.false;
-        setTimeout(() => {
-          expect(this.$refs.countdown.counting).to.be.true;
-          done();
-        }, 100);
+        expect(this.$refs.countdown.counting).to.be.true;
+        done();
       },
     }).$mount();
   });
@@ -23,6 +20,25 @@ describe('prop#auto-start', () => {
           expect(this.$refs.countdown.counting).to.be.false;
           done();
         }, 100);
+      },
+    }).$mount();
+  });
+
+  it('should start the countdown automatically when the `auto-start` prop is set to `true`', (done) => {
+    new Vue({
+      data() {
+        return {
+          autoStart: false,
+        };
+      },
+      template: '<countdown ref="countdown" :time="2000" :auto-start="autoStart"></countdown>',
+      mounted() {
+        expect(this.$refs.countdown.counting).to.be.false;
+        this.autoStart = true;
+        this.$nextTick(() => {
+          expect(this.$refs.countdown.counting).to.be.true;
+          done();
+        });
       },
     }).$mount();
   });

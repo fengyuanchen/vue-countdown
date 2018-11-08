@@ -19,6 +19,25 @@ describe('prop#time', () => {
     }).$mount();
   });
 
+  it('should update the countdown when the `time` prop is changed', (done) => {
+    new Vue({
+      data() {
+        return {
+          time: 1000,
+        };
+      },
+      template: '<countdown ref="countdown" :time="time"></countdown>',
+      mounted() {
+        expect(this.$refs.countdown.totalMilliseconds).to.equal(1000);
+        this.time = 2000;
+        this.$nextTick(() => {
+          expect(this.$refs.countdown.totalMilliseconds).to.equal(2000);
+          done();
+        });
+      },
+    }).$mount();
+  });
+
   it('should throw error when the value is less than 0', () => {
     try {
       new Vue({
