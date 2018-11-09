@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 (Nov 9, 2018)
+
+- Fixes the issue of props updating (#1).
+
 ## 1.0.0 (Oct 21, 2018)
 
 - Supports 6 props (options): `autoStart`, `emitEvents`, `interval`, `tag`, `time` and `transform`.

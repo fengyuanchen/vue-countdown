@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v1.0.0
+ * vue-countdown v1.0.1
  * https://fengyuanchen.github.io/vue-countdown
  *
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2018-10-21T09:06:58.941Z
+ * Date: 2018-11-09T12:54:21.854Z
  */
 
 var MILLISECONDS_SECOND = 1000;
@@ -174,18 +174,18 @@ var index = {
     }))] : this.$slots.default);
   },
   watch: {
-    $prop: {
+    $props: {
       deep: true,
       immediate: true,
-      handler: function handler() {
-        var _this = this;
 
+      /**
+       * Update the countdown when props changed.
+       */
+      handler: function handler() {
         this.totalMilliseconds = this.time;
 
         if (this.autoStart) {
-          this.$nextTick(function () {
-            _this.start();
-          });
+          this.start();
         }
       }
     }
