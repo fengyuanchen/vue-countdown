@@ -1,7 +1,7 @@
 describe('event#end', () => {
   it('should trigger the `end` event', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="100" :interval="100" @end="handleCountdownEnd"></countdown>',
+      template: '<countdown ref="countdown" :time="100" :interval="100" @end="handleCountdownEnd" />',
       methods: {
         handleCountdownEnd() {
           expect(this.$refs.countdown.totalMilliseconds).to.equal(0);
@@ -14,7 +14,7 @@ describe('event#end', () => {
 
   it('should not trigger the `end` event when the `emit-events` property is set to `false`', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="100" :interval="100" :emit-events="false" @end="handleCountdownEnd"></countdown>',
+      template: '<countdown ref="countdown" :time="100" :interval="100" :emit-events="false" @end="handleCountdownEnd" />',
       methods: {
         handleCountdownEnd() {
           expect.fail(1, 0);

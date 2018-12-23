@@ -1,7 +1,7 @@
 describe('method#start', () => {
   it('should start the countdown', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" :auto-start="false" @start="handleCountdownStart"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :auto-start="false" @start="handleCountdownStart" />',
       methods: {
         handleCountdownStart() {
           expect(this.$refs.countdown.counting).to.be.true;
@@ -19,7 +19,7 @@ describe('method#start', () => {
     let count = 0;
 
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" :auto-start="false" @start="handleCountdownStart"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :auto-start="false" @start="handleCountdownStart" />',
       methods: {
         handleCountdownStart() {
           count += 1;

@@ -1,7 +1,7 @@
 describe('event#start', () => {
   it('should trigger the `start` event', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" :interval="100" @start="handleCountdownStart"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :interval="100" @start="handleCountdownStart" />',
       methods: {
         handleCountdownStart() {
           this.$nextTick(() => {
@@ -16,7 +16,7 @@ describe('event#start', () => {
 
   it('should not trigger the `start` event when the `emit-events` property is set to `false`', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" :emit-events="false" @start="handleCountdownStart"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :emit-events="false" @start="handleCountdownStart" />',
       methods: {
         handleCountdownStart() {
           expect.fail(1, 0);

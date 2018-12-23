@@ -1,7 +1,7 @@
 describe('event#abort', () => {
   it('should trigger the `abort` event', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" :interval="100" @progress="handleCountdownProgress" @abort="handleCountdownAbort"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :interval="100" @progress="handleCountdownProgress" @abort="handleCountdownAbort" />',
       methods: {
         handleCountdownProgress() {
           expect.fail(1, 0);
@@ -20,7 +20,7 @@ describe('event#abort', () => {
 
   it('should not trigger the `abort` event when it is not started', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" :auto-start="false" @abort="handleCountdownAbort"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :auto-start="false" @abort="handleCountdownAbort" />',
       methods: {
         handleCountdownAbort() {
           expect.fail(1, 0);
@@ -35,7 +35,7 @@ describe('event#abort', () => {
 
   it('should not trigger the `abort` event when the `emit-events` property is set to `false`', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" :emit-events="false" @abort="handleCountdownAbort"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :emit-events="false" @abort="handleCountdownAbort" />',
       methods: {
         handleCountdownAbort() {
           expect.fail(1, 0);

@@ -1,7 +1,7 @@
 describe('prop#tag', () => {
   it('should be "span" by default', (done) => {
     new Vue({
-      template: '<countdown :time="2000"></countdown>',
+      template: '<countdown :time="2000" />',
       mounted() {
         expect(this.$el.tagName.toLowerCase()).to.equal('span');
         done();
@@ -11,7 +11,7 @@ describe('prop#tag', () => {
 
   it('should be "div"', (done) => {
     new Vue({
-      template: '<countdown :time="2000" tag="div"></countdown>',
+      template: '<countdown :time="2000" tag="div" />',
       mounted() {
         expect(this.$el.tagName.toLowerCase()).to.equal('div');
         done();

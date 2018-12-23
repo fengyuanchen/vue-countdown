@@ -1,7 +1,7 @@
 describe('prop#interval', () => {
   it('should be `1000` by default', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" />',
       mounted() {
         expect(this.$refs.countdown.interval).to.equal(1000);
         done();
@@ -16,7 +16,7 @@ describe('prop#interval', () => {
           startTime: 0,
         };
       },
-      template: '<countdown ref="countdown" :time="200" :interval="100" @start="handleCountdownStart" @progress="handleCountdownProgress"></countdown>',
+      template: '<countdown ref="countdown" :time="200" :interval="100" @start="handleCountdownStart" @progress="handleCountdownProgress" />',
       methods: {
         handleCountdownStart() {
           this.startTime = Date.now();
@@ -36,7 +36,7 @@ describe('prop#interval', () => {
           startTime: 0,
         };
       },
-      template: '<countdown ref="countdown" :time="50" :interval="100" @start="handleCountdownStart" @end="handleCountdownEnd"></countdown>',
+      template: '<countdown ref="countdown" :time="50" :interval="100" @start="handleCountdownStart" @end="handleCountdownEnd" />',
       methods: {
         handleCountdownStart() {
           this.startTime = Date.now();
@@ -52,7 +52,7 @@ describe('prop#interval', () => {
   it('should throw error when the value is less than 0', () => {
     try {
       new Vue({
-        template: '<countdown :time="2000" :interval="-1"></countdown>',
+        template: '<countdown :time="2000" :interval="-1" />',
       }).$mount();
     } catch (error) {
       expect(error).to.be.an('error');

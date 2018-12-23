@@ -1,7 +1,7 @@
 describe('method#abort', () => {
   it('should abort the countdown', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" :interval="100" @progress="handleCountdownProgress"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :interval="100" @progress="handleCountdownProgress" />',
       methods: {
         handleCountdownProgress() {
           expect.fail(1, 0);
@@ -18,7 +18,7 @@ describe('method#abort', () => {
     let count = 0;
 
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" @abort="handleCountdownAbort"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" @abort="handleCountdownAbort" />',
       methods: {
         handleCountdownAbort() {
           count += 1;

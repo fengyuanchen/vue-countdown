@@ -1,7 +1,7 @@
 describe('prop#emit-events', () => {
   it('should emit events by default', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" @start="handleCountdownStart"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" @start="handleCountdownStart" />',
       methods: {
         handleCountdownStart() {
           done();
@@ -15,7 +15,7 @@ describe('prop#emit-events', () => {
 
   it('should not emit events', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="2000" :emit-events="false" @start="handleCountdownStart"></countdown>',
+      template: '<countdown ref="countdown" :time="2000" :emit-events="false" @start="handleCountdownStart" />',
       methods: {
         handleCountdownStart() {
           expect.fail(1, 0);

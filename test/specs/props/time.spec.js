@@ -1,7 +1,7 @@
 describe('prop#time', () => {
   it('should be `0` by default', (done) => {
     new Vue({
-      template: '<countdown ref="countdown"></countdown>',
+      template: '<countdown ref="countdown" />',
       mounted() {
         expect(this.$refs.countdown.time).to.equal(0);
         done();
@@ -11,7 +11,7 @@ describe('prop#time', () => {
 
   it('should match the given value', (done) => {
     new Vue({
-      template: '<countdown ref="countdown" :time="1000"></countdown>',
+      template: '<countdown ref="countdown" :time="1000" />',
       mounted() {
         expect(this.$refs.countdown.time).to.equal(1000);
         done();
@@ -26,7 +26,7 @@ describe('prop#time', () => {
           time: 1000,
         };
       },
-      template: '<countdown ref="countdown" :time="time"></countdown>',
+      template: '<countdown ref="countdown" :time="time" />',
       mounted() {
         expect(this.$refs.countdown.totalMilliseconds).to.equal(1000);
         this.time = 2000;
@@ -41,7 +41,7 @@ describe('prop#time', () => {
   it('should throw error when the value is less than 0', () => {
     try {
       new Vue({
-        template: '<countdown :time="-1"></countdown>',
+        template: '<countdown :time="-1" />',
       }).$mount();
     } catch (error) {
       expect(error).to.be.an('error');
