@@ -2,6 +2,7 @@ const MILLISECONDS_SECOND = 1000;
 const MILLISECONDS_MINUTE = 60 * MILLISECONDS_SECOND;
 const MILLISECONDS_HOUR = 60 * MILLISECONDS_MINUTE;
 const MILLISECONDS_DAY = 24 * MILLISECONDS_HOUR;
+const EVENT_VISIBILITY_CHANGE = 'visibilitychange';
 
 export default {
   name: 'countdown',
@@ -13,6 +14,12 @@ export default {
        * @type {boolean}
        */
       counting: false,
+
+      /**
+       * The absolute end time.
+       * @type {number}
+       */
+      endTime: 0,
 
       /**
        * The remaining milliseconds.
@@ -46,6 +53,14 @@ export default {
       type: Number,
       default: 1000,
       validator: value => value >= 0,
+    },
+
+    /**
+     * Generate the current time of a specific time zone.
+     */
+    now: {
+      type: Function,
+      default: () => Date.now(),
     },
 
     /**
@@ -175,6 +190,7 @@ export default {
        */
       handler() {
         this.totalMilliseconds = this.time;
+        this.endTime = this.now() + this.time;
 
         if (this.autoStart) {
           this.start();
@@ -219,7 +235,9 @@ export default {
       const delay = Math.min(this.totalMilliseconds, this.interval);
 
       if (delay > 0) {
-        this.timeout = setTimeout(this.progress, delay, this);
+        this.timeout = setTimeout(() => {
+          this.progress();
+        }, delay);
       } else {
         this.end();
       }
@@ -309,9 +327,43 @@ export default {
         this.$emit('end');
       }
     },
+
+    /**
+     * Updates the count.
+     * @private
+     */
+    update() {
+      if (this.counting) {
+        this.totalMilliseconds = Math.max(0, this.endTime - this.now());
+      }
+    },
+
+    /**
+     * visibility change event handler.
+     * @private
+     */
+    handleVisibilityChange() {
+      switch (document.visibilityState) {
+        case 'visible':
+          this.update();
+          this.continue();
+          break;
+
+        case 'hidden':
+          this.pause();
+          break;
+
+        default:
+      }
+    },
+  },
+
+  mounted() {
+    document.addEventListener(EVENT_VISIBILITY_CHANGE, this.handleVisibilityChange);
   },
 
   beforeDestroy() {
+    document.removeEventListener(EVENT_VISIBILITY_CHANGE, this.handleVisibilityChange);
     this.pause();
   },
 };
