@@ -1,8 +1,13 @@
 # Changelog
 
+## 1.1.0 (Dec 23, 2018)
+
+- Add new `now` option for customizing local time.
+- Pause the countdown when page hidden and continue the countdown when page visible again.
+
 ## 1.0.1 (Nov 9, 2018)
 
-- Fixes the issue of props updating (#1).
+- Fix the issue of props updating (#1).
 
 ## 1.0.0 (Oct 21, 2018)
 

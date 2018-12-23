@@ -21,4 +21,8 @@ window.onload = function () {
       },
     }
   });
+
+  if (typeof hljs !== 'undefined') {
+    hljs.initHighlightingOnLoad();
+  }
 };

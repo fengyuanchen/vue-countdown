@@ -1,6 +1,6 @@
 # vue-countdown
 
-[![Build Status](https://travis-ci.org/fengyuanchen/vue-countdown.svg)](https://travis-ci.org/fengyuanchen/vue-countdown) [![Coverage Status](https://img.shields.io/codecov/c/github/fengyuanchen/vue-countdown.svg)](https://codecov.io/gh/fengyuanchen/vue-countdown) [![Downloads](https://img.shields.io/npm/dm/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Version](https://img.shields.io/npm/v/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown)
+[![Build Status](https://img.shields.io/travis/fengyuanchen/vue-countdown.svg)](https://travis-ci.org/fengyuanchen/vue-countdown) [![Coverage Status](https://img.shields.io/codecov/c/github/fengyuanchen/vue-countdown.svg)](https://codecov.io/gh/fengyuanchen/vue-countdown) [![Downloads](https://img.shields.io/npm/dm/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Version](https://img.shields.io/npm/v/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown)
 
 > Countdown component for [Vue.js](https://vuejs.org).
 
@@ -85,6 +85,13 @@ Emits the countdown events.
 The interval time (in milliseconds) of the countdown progress.
 
 **Note:** The value should not be less than `0`.
+
+### now
+
+- Type: `Function`
+- Default: `() => Date.now()`
+
+Generates the current time (in milliseconds) in a specific time zone.
 
 ### tag
 

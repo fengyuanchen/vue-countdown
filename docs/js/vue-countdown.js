@@ -1,23 +1,24 @@
 /*!
- * vue-countdown v1.0.1
+ * vue-countdown v1.1.0
  * https://fengyuanchen.github.io/vue-countdown
  *
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2018-11-09T12:54:21.854Z
+ * Date: 2018-12-23T11:10:14.758Z
  */
 
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.VueCountdown = factory());
-}(this, (function () { 'use strict';
+  (global = global || self, global.VueCountdown = factory());
+}(this, function () { 'use strict';
 
   var MILLISECONDS_SECOND = 1000;
   var MILLISECONDS_MINUTE = 60 * MILLISECONDS_SECOND;
   var MILLISECONDS_HOUR = 60 * MILLISECONDS_MINUTE;
   var MILLISECONDS_DAY = 24 * MILLISECONDS_HOUR;
+  var EVENT_VISIBILITY_CHANGE = 'visibilitychange';
   var index = {
     name: 'countdown',
     data: function data() {
@@ -27,6 +28,12 @@
          * @type {boolean}
          */
         counting: false,
+
+        /**
+         * The absolute end time.
+         * @type {number}
+         */
+        endTime: 0,
 
         /**
          * The remaining milliseconds.
@@ -60,6 +67,16 @@
         default: 1000,
         validator: function validator(value) {
           return value >= 0;
+        }
+      },
+
+      /**
+       * Generate the current time of a specific time zone.
+       */
+      now: {
+        type: Function,
+        default: function _default() {
+          return Date.now();
         }
       },
 
@@ -189,6 +206,7 @@
          */
         handler: function handler() {
           this.totalMilliseconds = this.time;
+          this.endTime = this.now() + this.time;
 
           if (this.autoStart) {
             this.start();
@@ -225,6 +243,8 @@
        * @private
        */
       continue: function _continue() {
+        var _this = this;
+
         if (!this.counting) {
           return;
         }
@@ -232,7 +252,9 @@
         var delay = Math.min(this.totalMilliseconds, this.interval);
 
         if (delay > 0) {
-          this.timeout = setTimeout(this.progress, delay, this);
+          this.timeout = setTimeout(function () {
+            _this.progress();
+          }, delay);
         } else {
           this.end();
         }
@@ -321,13 +343,46 @@
            */
           this.$emit('end');
         }
+      },
+
+      /**
+       * Updates the count.
+       * @private
+       */
+      update: function update() {
+        if (this.counting) {
+          this.totalMilliseconds = Math.max(0, this.endTime - this.now());
+        }
+      },
+
+      /**
+       * visibility change event handler.
+       * @private
+       */
+      handleVisibilityChange: function handleVisibilityChange() {
+        switch (document.visibilityState) {
+          case 'visible':
+            this.update();
+            this.continue();
+            break;
+
+          case 'hidden':
+            this.pause();
+            break;
+
+          default:
+        }
       }
     },
+    mounted: function mounted() {
+      document.addEventListener(EVENT_VISIBILITY_CHANGE, this.handleVisibilityChange);
+    },
     beforeDestroy: function beforeDestroy() {
+      document.removeEventListener(EVENT_VISIBILITY_CHANGE, this.handleVisibilityChange);
       this.pause();
     }
   };
 
   return index;
 
-})));
+}));
