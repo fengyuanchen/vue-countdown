@@ -6,22 +6,19 @@ process.env.CHROME_BIN = puppeteer.executablePath();
 module.exports = (config) => {
   config.set({
     autoWatch: false,
-    basePath: '..',
     browsers: ['ChromeHeadless'],
     coverageIstanbulReporter: {
       reports: ['html', 'lcovonly', 'text-summary'],
     },
     files: [
-      'node_modules/vue/dist/vue.js',
-      'src/index.js',
-      'test/index.js',
-      'test/specs/**/*.spec.js',
+      '../node_modules/vue/dist/vue.js',
+      './index.js',
+      './specs/**/*.spec.js',
     ],
     frameworks: ['mocha', 'chai'],
     preprocessors: {
-      'src/index.js': ['rollup'],
-      'test/index.js': ['rollup'],
-      'test/specs/**/*.spec.js': ['rollup'],
+      './index.js': ['rollup'],
+      './specs/**/*.spec.js': ['rollup'],
     },
     reporters: ['mocha', 'coverage-istanbul'],
     rollupPreprocessor: {

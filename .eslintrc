@@ -2,12 +2,25 @@
   "root": true,
   "extends": "airbnb-base",
   "env": {
-    "browser": true
+    "browser": true,
+    "mocha": true
+  },
+  "globals": {
+    "expect": true,
+    "Vue": true
   },
   "rules": {
     "no-param-reassign": "off",
     "valid-jsdoc": ["error", {
       "requireReturn": false
     }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["test/**/*.spec.js"],
+      "rules": {
+        "no-unused-expressions": "off"
+      }
+    }
+  ]
 }
