@@ -36,13 +36,13 @@ describe('prop#interval', () => {
           startTime: 0,
         };
       },
-      template: '<countdown ref="countdown" :time="50" :interval="100" @start="handleCountdownStart" @end="handleCountdownEnd" />',
+      template: '<countdown ref="countdown" :time="100" :interval="200" @start="handleCountdownStart" @end="handleCountdownEnd" />',
       methods: {
         handleCountdownStart() {
           this.startTime = Date.now();
         },
         handleCountdownEnd() {
-          expect(Date.now() - this.startTime).to.closeTo(50, 10);
+          expect(Date.now() - this.startTime).to.closeTo(100, 50);
           done();
         },
       },
