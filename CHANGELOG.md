@@ -1,9 +1,13 @@
 # Changelog
 
+## 1.1.1 (Apr 5, 2019)
+
+- Use `requestAnimationFrame` instead of `setTimeout` for better performance (#33).
+
 ## 1.1.0 (Dec 23, 2018)
 
 - Add new `now` option for customizing local time.
-- Pause the countdown when page hidden and continue the countdown when page visible again.
+- Pause the countdown when the page is hidden and continue the countdown when the page is visible again.
 
 ## 1.0.1 (Nov 9, 2018)
 

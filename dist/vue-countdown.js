@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v1.1.0
+ * vue-countdown v1.1.1
  * https://fengyuanchen.github.io/vue-countdown
  *
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2019-04-02T10:55:54.517Z
+ * Date: 2019-04-05T14:29:42.461Z
  */
 
 (function (global, factory) {
@@ -251,20 +251,28 @@
 
         var delay = Math.min(this.totalMilliseconds, this.interval);
 
-        var step = function step(timestamp) {
-          if (!_this.stepStart) _this.stepStart = timestamp;
-
-          if (timestamp - _this.stepStart < delay) {
-            _this.timeout = window.requestAnimationFrame(step);
-          } else {
-            _this.progress();
-
-            _this.stepStart = null;
-          }
-        };
-
         if (delay > 0) {
-          this.timeout = window.requestAnimationFrame(step);
+          if (window.requestAnimationFrame) {
+            var start;
+
+            var step = function step(timestamp) {
+              if (!start) {
+                start = timestamp;
+              }
+
+              if (timestamp - start < delay) {
+                _this.requestId = requestAnimationFrame(step);
+              } else {
+                _this.progress();
+              }
+            };
+
+            this.requestId = requestAnimationFrame(step);
+          } else {
+            this.timeoutId = setTimeout(function () {
+              _this.progress();
+            }, delay);
+          }
         } else {
           this.end();
         }
@@ -275,7 +283,11 @@
        * @private
        */
       pause: function pause() {
-        window.cancelAnimationFrame(this.timeout);
+        if (window.requestAnimationFrame) {
+          cancelAnimationFrame(this.requestId);
+        } else {
+          clearTimeout(this.timeoutId);
+        }
       },
 
       /**
