@@ -234,10 +234,18 @@ export default {
 
       const delay = Math.min(this.totalMilliseconds, this.interval);
 
-      if (delay > 0) {
-        this.timeout = setTimeout(() => {
+      const step = (timestamp) => {
+        if (!this.stepStart) this.stepStart = timestamp;
+        if ((timestamp - this.stepStart) < delay) {
+          this.timeout = window.requestAnimationFrame(step);
+        } else {
           this.progress();
-        }, delay);
+          this.stepStart = null;
+        }
+      };
+
+      if (delay > 0) {
+        this.timeout = window.requestAnimationFrame(step);
       } else {
         this.end();
       }
@@ -248,7 +256,7 @@ export default {
      * @private
      */
     pause() {
-      clearTimeout(this.timeout);
+      window.cancelAnimationFrame(this.timeout);
     },
 
     /**

@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2018-12-23T11:10:14.758Z
+ * Date: 2019-04-02T10:55:54.517Z
  */
 
 'use strict';
@@ -247,10 +247,20 @@ var index = {
 
       var delay = Math.min(this.totalMilliseconds, this.interval);
 
-      if (delay > 0) {
-        this.timeout = setTimeout(function () {
+      var step = function step(timestamp) {
+        if (!_this.stepStart) _this.stepStart = timestamp;
+
+        if (timestamp - _this.stepStart < delay) {
+          _this.timeout = window.requestAnimationFrame(step);
+        } else {
           _this.progress();
-        }, delay);
+
+          _this.stepStart = null;
+        }
+      };
+
+      if (delay > 0) {
+        this.timeout = window.requestAnimationFrame(step);
       } else {
         this.end();
       }
@@ -261,7 +271,7 @@ var index = {
      * @private
      */
     pause: function pause() {
-      clearTimeout(this.timeout);
+      window.cancelAnimationFrame(this.timeout);
     },
 
     /**
