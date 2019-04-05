@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
-const rollupConfig = require('../rollup.config');
+const rollupConfig = require('./rollup.config');
 
 process.env.CHROME_BIN = puppeteer.executablePath();
+process.env.NODE_ENV = 'test';
 
 module.exports = (config) => {
   config.set({
@@ -11,21 +12,21 @@ module.exports = (config) => {
       reports: ['html', 'lcovonly', 'text-summary'],
     },
     files: [
-      '../node_modules/vue/dist/vue.js',
-      './index.js',
-      './specs/**/*.spec.js',
+      'node_modules/vue/dist/vue.js',
+      'test/index.js',
+      'test/specs/**/*.spec.js',
     ],
     frameworks: ['mocha', 'chai'],
     preprocessors: {
-      './index.js': ['rollup'],
-      './specs/**/*.spec.js': ['rollup'],
+      'test/index.js': ['rollup'],
+      'test/specs/**/*.spec.js': ['rollup'],
     },
     reporters: ['mocha', 'coverage-istanbul'],
     rollupPreprocessor: {
       plugins: rollupConfig.plugins,
       output: {
         format: 'iife',
-        name: rollupConfig.output[0].name,
+        name: 'Anonymous',
         sourcemap: 'inline',
       },
     },
