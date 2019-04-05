@@ -10,6 +10,7 @@
     "Vue": true
   },
   "rules": {
+    "import/no-extraneous-dependencies": "off",
     "no-param-reassign": "off",
     "valid-jsdoc": ["error", {
       "requireReturn": false
