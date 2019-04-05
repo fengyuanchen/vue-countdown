@@ -234,18 +234,27 @@ export default {
 
       const delay = Math.min(this.totalMilliseconds, this.interval);
 
-      const step = (timestamp) => {
-        if (!this.stepStart) this.stepStart = timestamp;
-        if ((timestamp - this.stepStart) < delay) {
-          this.timeout = window.requestAnimationFrame(step);
-        } else {
-          this.progress();
-          this.stepStart = null;
-        }
-      };
-
       if (delay > 0) {
-        this.timeout = window.requestAnimationFrame(step);
+        if (window.requestAnimationFrame) {
+          let start;
+          const step = (timestamp) => {
+            if (!start) {
+              start = timestamp;
+            }
+
+            if ((timestamp - start) < delay) {
+              this.requestId = requestAnimationFrame(step);
+            } else {
+              this.progress();
+            }
+          };
+
+          this.requestId = requestAnimationFrame(step);
+        } else {
+          this.timeoutId = setTimeout(() => {
+            this.progress();
+          }, delay);
+        }
       } else {
         this.end();
       }
@@ -256,7 +265,11 @@ export default {
      * @private
      */
     pause() {
-      window.cancelAnimationFrame(this.timeout);
+      if (window.requestAnimationFrame) {
+        cancelAnimationFrame(this.requestId);
+      } else {
+        clearTimeout(this.timeoutId);
+      }
     },
 
     /**
