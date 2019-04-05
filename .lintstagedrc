@@ -1,3 +1,0 @@
-{
-  "(src|test)/**/*.js|*.config.js": ["eslint --fix", "git add"]
-}

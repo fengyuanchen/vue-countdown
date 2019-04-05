@@ -4,27 +4,10 @@
   "version": "1.1.0",
   "main": "dist/vue-countdown.common.js",
   "module": "dist/vue-countdown.esm.js",
-  "unpkg": "dist/vue-countdown.js",
-  "repository": "fengyuanchen/vue-countdown",
-  "homepage": "https://fengyuanchen.github.io/vue-countdown",
-  "license": "MIT",
-  "author": {
-    "name": "Chen Fengyuan",
-    "url": "https://chenfengyuan.com"
-  },
+  "browser": "dist/vue-countdown.js",
   "files": [
     "src",
     "dist"
-  ],
-  "keywords": [
-    "countdown",
-    "component",
-    "vue-component",
-    "html",
-    "css",
-    "javascript",
-    "front-end",
-    "web"
   ],
   "scripts": {
     "build": "rollup -c",
@@ -37,6 +20,29 @@
     "start": "npm run dev",
     "test": "cross-env NODE_ENV=test karma start test/karma.conf.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fengyuanchen/vue-countdown.git"
+  },
+  "keywords": [
+    "countdown",
+    "component",
+    "vue-component",
+    "html",
+    "css",
+    "javascript",
+    "front-end",
+    "web"
+  ],
+  "author": {
+    "name": "Chen Fengyuan",
+    "url": "https://chenfengyuan.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fengyuanchen/vue-countdown/issues"
+  },
+  "homepage": "https://fengyuanchen.github.io/vue-countdown",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
@@ -74,5 +80,37 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not ie <= 8"
+  ],
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.js": [
+        "eslint --fix",
+        "git add"
+      ],
+      "*.{css,scss,html}": [
+        "stylelint --fix",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "{dist,docs}/**/*.js",
+      "*.min.*"
+    ]
   }
 }
