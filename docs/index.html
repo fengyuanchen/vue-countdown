@@ -72,7 +72,7 @@
   &lt;/countdown&gt;
 
   &lt;countdown :time=&quot;time&quot; tag=&quot;p&quot;&gt;
-    &lt;template slot-scope=&quot;props&quot;&gt;Christmas Time Remaining：{{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds.&lt;/template&gt;
+    &lt;template slot-scope=&quot;props&quot;&gt;Christmas Time Remaining: {{ props.totalDays }} days / {{ props.totalHours }} hours / {{ props.totalMinutes }} minutes / {{ props.totalSeconds }} seconds / {{ props.totalMilliseconds }} milliseconds.&lt;/template&gt;
   &lt;/countdown&gt;
 
   &lt;button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; :disabled=&quot;counting&quot; @click=&quot;startCountdown&quot;&gt;
