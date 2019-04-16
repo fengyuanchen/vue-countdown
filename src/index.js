@@ -294,10 +294,12 @@ export default {
           hours: this.hours,
           minutes: this.minutes,
           seconds: this.seconds,
+          milliseconds: this.milliseconds,
           totalDays: this.totalDays,
           totalHours: this.totalHours,
           totalMinutes: this.totalMinutes,
           totalSeconds: this.totalSeconds,
+          totalMilliseconds: this.totalMilliseconds,
         });
       }
 
