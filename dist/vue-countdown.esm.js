@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v1.1.1
+ * vue-countdown v1.1.2
  * https://fengyuanchen.github.io/vue-countdown
  *
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2019-04-05T14:29:42.461Z
+ * Date: 2019-04-16T11:53:29.768Z
  */
 
 var MILLISECONDS_SECOND = 1000;
@@ -306,10 +306,12 @@ var index = {
           hours: this.hours,
           minutes: this.minutes,
           seconds: this.seconds,
+          milliseconds: this.milliseconds,
           totalDays: this.totalDays,
           totalHours: this.totalHours,
           totalMinutes: this.totalMinutes,
-          totalSeconds: this.totalSeconds
+          totalSeconds: this.totalSeconds,
+          totalMilliseconds: this.totalMilliseconds
         });
       }
 

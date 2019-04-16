@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2 (Apr 16, 2019)
+
+- Add missing properties for the `progress` event (#34).
+
 ## 1.1.1 (Apr 5, 2019)
 
 - Use `requestAnimationFrame` instead of `setTimeout` for better performance (#33).
