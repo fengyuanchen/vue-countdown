@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v1.1.2
+ * vue-countdown v1.1.3
  * https://fengyuanchen.github.io/vue-countdown
  *
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2019-04-16T11:53:29.768Z
+ * Date: 2019-09-14T04:14:37.456Z
  */
 
 (function (global, factory) {
@@ -235,7 +235,9 @@
           this.$emit('start');
         }
 
-        this.continue();
+        if (document.visibilityState === 'visible') {
+          this.continue();
+        }
       },
 
       /**

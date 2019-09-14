@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3 (Sep 14, 2019)
+
+- Continue counting down only when the current tab is visible (#37).
+
 ## 1.1.2 (Apr 16, 2019)
 
 - Add missing properties for the `progress` event (#34).
