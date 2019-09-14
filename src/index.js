@@ -220,7 +220,9 @@ export default {
         this.$emit('start');
       }
 
-      this.continue();
+      if (document.visibilityState === 'visible') {
+        this.continue();
+      }
     },
 
     /**
