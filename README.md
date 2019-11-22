@@ -32,7 +32,7 @@ dist/
 ### Install
 
 ```shell
-npm install @chenfengyuan/vue-countdown vue
+npm install @chenfengyuan/vue-countdown
 ```
 
 In browser:
