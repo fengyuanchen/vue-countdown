@@ -238,17 +238,31 @@ export default {
 
       if (delay > 0) {
         if (window.requestAnimationFrame) {
-          let start;
-          const step = (timestamp) => {
-            if (!start) {
-              start = timestamp;
+          let init;
+          let prev;
+          const step = (now) => {
+            if (!init) {
+              init = now;
             }
 
-            if ((timestamp - start) < delay) {
-              this.requestId = requestAnimationFrame(step);
-            } else {
-              this.progress();
+            if (!prev) {
+              prev = now;
             }
+
+            const range = now - init;
+
+            if (
+              range >= delay
+
+              // Avoid losing time about one second per minute (now - prev ≈ 16ms) (#43)
+              || range + ((now - prev) / 2) >= delay
+            ) {
+              this.progress();
+            } else {
+              this.requestId = requestAnimationFrame(step);
+            }
+
+            prev = now;
           };
 
           this.requestId = requestAnimationFrame(step);

@@ -1,5 +1,9 @@
 # Changelog
 
+## next
+
+- Fix an issue of losing time about one second per minute (#43).
+
 ## 1.1.3 (Sep 14, 2019)
 
 - Continue counting down only when the current tab is visible (#37).
