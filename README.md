@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/fengyuanchen/vue-countdown.svg)](https://travis-ci.org/fengyuanchen/vue-countdown) [![Coverage Status](https://img.shields.io/codecov/c/github/fengyuanchen/vue-countdown.svg)](https://codecov.io/gh/fengyuanchen/vue-countdown) [![Downloads](https://img.shields.io/npm/dm/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Version](https://img.shields.io/npm/v/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown)
 
-> Countdown component for [Vue.js](https://vuejs.org).
+> Countdown component for [Vue.js](https://vuejs.org/).
 
 - [Website](https://fengyuanchen.github.io/vue-countdown)
 
@@ -229,10 +229,10 @@ This event fires immediately when the `end` method is called.
 
 ## Versioning
 
-Maintained under the [Semantic Versioning guidelines](https://semver.org).
+Maintained under the [Semantic Versioning guidelines](https://semver.org/).
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT) © [Chen Fengyuan](https://chenfengyuan.com)
+[MIT](https://opensource.org/licenses/MIT) © [Chen Fengyuan](https://chenfengyuan.com/)
 
 [⬆ back to top](#table-of-contents)

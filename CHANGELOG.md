@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## 1.1.4 (Dec 21, 2019)
 
 - Fix an issue of losing time about one second per minute (#43).
 
