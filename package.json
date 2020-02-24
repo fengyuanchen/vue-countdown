@@ -100,8 +100,5 @@
       "eslint --fix",
       "git add"
     ]
-  },
-  "dependencies": {
-    "npm-check-updates": "^4.0.1"
   }
 }
