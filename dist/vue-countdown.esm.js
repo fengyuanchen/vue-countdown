@@ -1,11 +1,11 @@
 /*!
- * vue-countdown v1.1.4
+ * vue-countdown v1.1.5
  * https://fengyuanchen.github.io/vue-countdown
  *
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2019-12-21T08:26:38.232Z
+ * Date: 2020-02-25T01:19:32.769Z
  */
 
 var MILLISECONDS_SECOND = 1000;

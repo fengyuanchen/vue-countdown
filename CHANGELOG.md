@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.5 (Feb 25, 2020)
+
+- Drop an useless dependency (#45).
+
 ## 1.1.4 (Dec 21, 2019)
 
 - Fix an issue of losing time about one second per minute (#43).
