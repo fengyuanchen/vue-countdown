@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2020-02-25T01:19:32.769Z
+ * Date: 2020-02-26T14:35:46.678Z
  */
 
 (function (global, factory) {
@@ -43,6 +43,14 @@
       };
     },
     props: {
+      /**
+       * Allow negative value for props interval and time
+       */
+      allowNegative: {
+        type: Boolean,
+        default: false
+      },
+
       /**
        * Starts the countdown automatically when initialized.
        */
@@ -93,10 +101,7 @@
        */
       time: {
         type: Number,
-        default: 0,
-        validator: function validator(value) {
-          return value >= 0;
-        }
+        default: 0
       },
 
       /**
@@ -115,7 +120,8 @@
        * @returns {number} The computed value.
        */
       days: function days() {
-        return Math.floor(this.totalMilliseconds / MILLISECONDS_DAY);
+        var value = this.totalMilliseconds / MILLISECONDS_DAY;
+        return this.totalMilliseconds < 0 ? Math.ceil(value) : Math.floor(value);
       },
 
       /**
@@ -123,7 +129,8 @@
        * @returns {number} The computed value.
        */
       hours: function hours() {
-        return Math.floor(this.totalMilliseconds % MILLISECONDS_DAY / MILLISECONDS_HOUR);
+        var value = this.totalMilliseconds % MILLISECONDS_DAY / MILLISECONDS_HOUR;
+        return this.totalMilliseconds < 0 ? Math.ceil(value) : Math.floor(value);
       },
 
       /**
@@ -131,7 +138,8 @@
        * @returns {number} The computed value.
        */
       minutes: function minutes() {
-        return Math.floor(this.totalMilliseconds % MILLISECONDS_HOUR / MILLISECONDS_MINUTE);
+        var value = this.totalMilliseconds % MILLISECONDS_HOUR / MILLISECONDS_MINUTE;
+        return this.totalMilliseconds < 0 ? Math.ceil(value) : Math.floor(value);
       },
 
       /**
@@ -139,7 +147,8 @@
        * @returns {number} The computed value.
        */
       seconds: function seconds() {
-        return Math.floor(this.totalMilliseconds % MILLISECONDS_MINUTE / MILLISECONDS_SECOND);
+        var value = this.totalMilliseconds % MILLISECONDS_MINUTE / MILLISECONDS_SECOND;
+        return this.totalMilliseconds < 0 ? Math.ceil(value) : Math.floor(value);
       },
 
       /**
@@ -147,7 +156,8 @@
        * @returns {number} The computed value.
        */
       milliseconds: function milliseconds() {
-        return Math.floor(this.totalMilliseconds % MILLISECONDS_SECOND);
+        var value = this.totalMilliseconds % MILLISECONDS_SECOND;
+        return this.totalMilliseconds < 0 ? Math.ceil(value) : Math.floor(value);
       },
 
       /**
@@ -180,6 +190,11 @@
        */
       totalSeconds: function totalSeconds() {
         return Math.floor(this.totalMilliseconds / MILLISECONDS_SECOND);
+      }
+    },
+    created: function created() {
+      if (!this.allowNegative && this.time < 0) {
+        throw new Error('[Vue warn]: Invalid prop: custom validator check failed for prop "time".');
       }
     },
     render: function render(createElement) {
@@ -251,9 +266,9 @@
           return;
         }
 
-        var delay = Math.min(this.totalMilliseconds, this.interval);
+        var delay = Math.min(this.interval, this.allowNegative ? Math.abs(this.totalMilliseconds) : this.totalMilliseconds);
 
-        if (delay > 0) {
+        if (this.allowNegative || delay > 0) {
           if (window.requestAnimationFrame) {
             var init;
             var prev;
@@ -314,7 +329,7 @@
 
         this.totalMilliseconds -= this.interval;
 
-        if (this.emitEvents && this.totalMilliseconds > 0) {
+        if (this.emitEvents && (this.allowNegative || this.totalMilliseconds > 0)) {
           /**
            * Countdown progress event.
            * @event Countdown#progress

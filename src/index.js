@@ -31,6 +31,14 @@ export default {
 
   props: {
     /**
+     * Allow negative value for props interval and time
+     */
+    allowNegative: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Starts the countdown automatically when initialized.
      */
     autoStart: {
@@ -77,7 +85,6 @@ export default {
     time: {
       type: Number,
       default: 0,
-      validator: (value) => value >= 0,
     },
 
     /**
@@ -95,7 +102,8 @@ export default {
      * @returns {number} The computed value.
      */
     days() {
-      return Math.floor(this.totalMilliseconds / MILLISECONDS_DAY);
+      const value = this.totalMilliseconds / MILLISECONDS_DAY;
+      return (this.totalMilliseconds < 0) ? Math.ceil(value) : Math.floor(value);
     },
 
     /**
@@ -103,7 +111,8 @@ export default {
      * @returns {number} The computed value.
      */
     hours() {
-      return Math.floor((this.totalMilliseconds % MILLISECONDS_DAY) / MILLISECONDS_HOUR);
+      const value = (this.totalMilliseconds % MILLISECONDS_DAY) / MILLISECONDS_HOUR;
+      return (this.totalMilliseconds < 0) ? Math.ceil(value) : Math.floor(value);
     },
 
     /**
@@ -111,7 +120,8 @@ export default {
      * @returns {number} The computed value.
      */
     minutes() {
-      return Math.floor((this.totalMilliseconds % MILLISECONDS_HOUR) / MILLISECONDS_MINUTE);
+      const value = (this.totalMilliseconds % MILLISECONDS_HOUR) / MILLISECONDS_MINUTE;
+      return (this.totalMilliseconds < 0) ? Math.ceil(value) : Math.floor(value);
     },
 
     /**
@@ -119,7 +129,8 @@ export default {
      * @returns {number} The computed value.
      */
     seconds() {
-      return Math.floor((this.totalMilliseconds % MILLISECONDS_MINUTE) / MILLISECONDS_SECOND);
+      const value = (this.totalMilliseconds % MILLISECONDS_MINUTE) / MILLISECONDS_SECOND;
+      return (this.totalMilliseconds < 0) ? Math.ceil(value) : Math.floor(value);
     },
 
     /**
@@ -127,7 +138,8 @@ export default {
      * @returns {number} The computed value.
      */
     milliseconds() {
-      return Math.floor(this.totalMilliseconds % MILLISECONDS_SECOND);
+      const value = this.totalMilliseconds % MILLISECONDS_SECOND;
+      return (this.totalMilliseconds < 0) ? Math.ceil(value) : Math.floor(value);
     },
 
     /**
@@ -161,6 +173,12 @@ export default {
     totalSeconds() {
       return Math.floor(this.totalMilliseconds / MILLISECONDS_SECOND);
     },
+  },
+
+  created() {
+    if (!this.allowNegative && this.time < 0) {
+      throw new Error('[Vue warn]: Invalid prop: custom validator check failed for prop "time".');
+    }
   },
 
   render(createElement) {
@@ -234,9 +252,12 @@ export default {
         return;
       }
 
-      const delay = Math.min(this.totalMilliseconds, this.interval);
+      const delay = Math.min(
+        this.interval,
+        (this.allowNegative) ? Math.abs(this.totalMilliseconds) : this.totalMilliseconds,
+      );
 
-      if (delay > 0) {
+      if (this.allowNegative || delay > 0) {
         if (window.requestAnimationFrame) {
           let init;
           let prev;
@@ -300,7 +321,7 @@ export default {
 
       this.totalMilliseconds -= this.interval;
 
-      if (this.emitEvents && this.totalMilliseconds > 0) {
+      if (this.emitEvents && (this.allowNegative || this.totalMilliseconds > 0)) {
         /**
          * Countdown progress event.
          * @event Countdown#progress

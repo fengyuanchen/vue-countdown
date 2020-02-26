@@ -61,6 +61,12 @@
         </countdown>
         <span v-else>Fetch Verification Code</span>
       </button>
+      <countdown :allow-negative="true" :time="lastTime" :interval="100" tag="p">
+        <template slot-scope="props">Last Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }}.{{ Math.floor(props.milliseconds / 100) }} seconds.</template>
+      </countdown>
+      <countdown :allow-negative="true" :time="5000" :interval="100" tag="p" >
+        <template slot-scope="props">Continue Negative Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }}.{{ Math.floor(props.milliseconds / 100) }} seconds.</template>
+      </countdown>
     </div>
     <p class="count"></p>
     <br>
@@ -81,6 +87,13 @@
     &lt;/countdown&gt;
     &lt;span v-else&gt;Fetch Verification Code&lt;/span&gt;
   &lt;/button&gt;
+
+  &lt;countdown :allow-negative=&quot;true&quot; :time=&quot;lastTime&quot; :interval=&quot;100&quot; tag=&quot;p&quot;&gt;
+    &lt;template slot-scope=&quot;props&quot;&gt;New Year Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }}.{{ Math.floor(props.milliseconds / 100) }} seconds.&lt;/template&gt;
+  &lt;/countdown&gt;
+  &lt;countdown :allow-negative=&quot;true&quot; :time=&quot;5000&quot; :interval=&quot;100&quot; tag=&quot;p&quot;&gt;
+    &lt;template slot-scope=&quot;props&quot;&gt;Continue Negative Countdown：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }}.{{ Math.floor(props.milliseconds / 100) }} seconds.&lt;/template&gt;
+  &lt;/countdown&gt;
 &lt;/div&gt;</code></pre>
 
     <h6>JavaScript:</h6>
@@ -92,10 +105,12 @@
       data: function () {
         var now = new Date();
         var newYear = new Date(now.getFullYear() + 1, 0, 1);
+        var lastYar = new Date(now.getFullYear(), 0, 1);
 
         return {
           counting: false,
           time: newYear - now,
+          lastTime: lastYar - now,
         };
       },
       methods: {

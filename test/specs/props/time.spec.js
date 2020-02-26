@@ -47,4 +47,18 @@ describe('prop#time', () => {
       expect(error).to.be.an('error');
     }
   });
+
+  it('should not throw error when allowNegative props is set and the value is less than 0', (done) => {
+    try {
+      new Vue({
+        template: '<countdown ref="countdown" :allow-negative="true" :time="-1" />',
+        mounted() {
+          expect(this.$refs.countdown.time).to.equal(-1);
+          done();
+        },
+      }).$mount();
+    } catch (error) {
+      expect.fail(1, 0, error);
+    }
+  });
 });
