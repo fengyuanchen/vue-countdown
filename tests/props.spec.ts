@@ -137,7 +137,7 @@ describe('props', () => {
         },
       });
 
-      expect(wrapper.vm.now()).toBe(Date.now());
+      expect(wrapper.vm.now()).toBeLessThanOrEqual(Date.now());
     });
 
     it('should match the given time', () => {
@@ -153,7 +153,7 @@ describe('props', () => {
         },
       });
 
-      expect(wrapper.vm.now()).toBeGreaterThan(new Date(
+      expect(wrapper.vm.now()).toBeGreaterThanOrEqual(new Date(
         date.getFullYear(),
         date.getMonth(),
         date.getDate(),
