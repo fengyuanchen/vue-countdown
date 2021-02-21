@@ -1,7 +1,11 @@
+# [2.0.0-beta](https://github.com/fengyuanchen/vue-countdown/compare/v2.0.0-alpha...v2.0.0-beta) (2021-02-21)
+
+
+
 # [2.0.0-alpha](https://github.com/fengyuanchen/vue-countdown/compare/v1.1.5...v2.0.0-alpha) (2021-02-11)
 
 
-* refactor!: upgrade to Vue 3 ([badbe5c](https://github.com/fengyuanchen/vue-countdown/commit/badbe5cbf4c6aec5626eb2c04ceceb7ee7e3ea3a))
+* refactor!: upgrade to Vue 3 ([c998a67](https://github.com/fengyuanchen/vue-countdown/commit/c998a67e5c6b454803510ef1cbb4d180072124f9))
 
 
 ### BREAKING CHANGES
