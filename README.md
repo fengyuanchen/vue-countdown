@@ -35,10 +35,10 @@ In browser:
 ### Usage
 
 ```js
-import Vue from 'vue';
+import { createApp } from 'vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 
-const app = Vue.createApp({});
+const app = createApp({});
 
 app.component(VueCountdown.name, VueCountdown);
 ```
