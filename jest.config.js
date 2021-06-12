@@ -8,5 +8,6 @@ module.exports = {
     '^.+\\.js$': 'babel-jest',
     '^.+\\.vue$': 'vue-jest',
   },
+  testEnvironment: 'jsdom',
   testMatch: ['**/tests/*.spec.ts'],
 };
