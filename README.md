@@ -1,6 +1,6 @@
 # vue-countdown
 
-[![Build Status](https://img.shields.io/github/workflow/status/fengyuanchen/vue-countdown/ci/main.svg)](https://github.com/fengyuanchen/vue-countdown/actions) [![Coverage Status](https://img.shields.io/codecov/c/github/fengyuanchen/vue-countdown.svg)](https://codecov.io/gh/fengyuanchen/vue-countdown) [![Downloads](https://img.shields.io/npm/dm/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Version](https://img.shields.io/npm/v/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Gzip Size](https://img.shields.io/bundlephobia/minzip/@chenfengyuan/vue-countdown.svg)](https://unpkg.com/@chenfengyuan/vue-countdown/dist/vue-countdown.js)
+[![Build Status](https://img.shields.io/github/workflow/status/fengyuanchen/vue-countdown/ci/main.svg)](https://github.com/fengyuanchen/vue-countdown/actions) [![Coverage Status](https://img.shields.io/codecov/c/github/fengyuanchen/vue-countdown.svg)](https://codecov.io/gh/fengyuanchen/vue-countdown) [![Downloads](https://img.shields.io/npm/dm/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Version](https://img.shields.io/npm/v/@chenfengyuan/vue-countdown/next.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Gzip Size](https://img.shields.io/bundlephobia/minzip/@chenfengyuan/vue-countdown.svg)](https://unpkg.com/@chenfengyuan/vue-countdown/dist/vue-countdown.js)
 
 > Countdown component for Vue 3.
 
@@ -22,7 +22,7 @@ dist/
 ### Installation
 
 ```shell
-npm install vue @chenfengyuan/vue-countdown
+npm install vue@next @chenfengyuan/vue-countdown@next
 ```
 
 In browser:
