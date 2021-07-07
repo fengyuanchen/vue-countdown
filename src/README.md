@@ -5,21 +5,17 @@
 ## Basic usage
 
 ```html
-<template>
-  <vue-countdown :time="2 * 24 * 60 * 60 * 1000" v-slot="{ days, hours, minutes, seconds }">
-    Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
-  </vue-countdown>
-</template>
+<vue-countdown :time="2 * 24 * 60 * 60 * 1000" v-slot="{ days, hours, minutes, seconds }">
+  Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
+</vue-countdown>
 ```
 
 ## Custom interval
 
 ```html
-<template>
-  <vue-countdown :time="time" :interval="100" v-slot="{ days, hours, minutes, seconds, milliseconds }">
-    New Year Countdown：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }}.{{ Math.floor(milliseconds / 100) }} seconds.
-  </vue-countdown>
-</template>
+<vue-countdown :time="time" :interval="100" v-slot="{ days, hours, minutes, seconds, milliseconds }">
+  New Year Countdown：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }}.{{ Math.floor(milliseconds / 100) }} seconds.
+</vue-countdown>
 
 <script>
 export default {
@@ -38,11 +34,9 @@ export default {
 ## Transform slot props
 
 ```html
-<template>
-  <vue-countdown :time="2 * 24 * 60 * 60 * 1000" :transform="transformSlotProps" v-slot="{ days, hours, minutes, seconds }">
-    Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
-  </vue-countdown>
-</template>
+<vue-countdown :time="2 * 24 * 60 * 60 * 1000" :transform="transformSlotProps" v-slot="{ days, hours, minutes, seconds }">
+  Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
+</vue-countdown>
 
 <script>
 export default {
@@ -64,12 +58,10 @@ export default {
 ## Countdown on demand
 
 ```html
-<template>
-  <button type="button" class="btn btn-primary" :disabled="counting" @click="startCountdown">
-    <vue-countdown v-if="counting" :time="60000" @end="onCountdownEnd" v-slot="{ totalSeconds }">Fetch again {{ totalSeconds }} seconds later</vue-countdown>
-    <span v-else>Fetch Verification Code</span>
-  </button>
-</template>
+<button type="button" class="btn btn-primary" :disabled="counting" @click="startCountdown">
+  <vue-countdown v-if="counting" :time="60000" @end="onCountdownEnd" v-slot="{ totalSeconds }">Fetch again {{ totalSeconds }} seconds later</vue-countdown>
+  <span v-else>Fetch Verification Code</span>
+</button>
 
 <script>
 export default {
