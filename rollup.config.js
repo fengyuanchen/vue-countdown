@@ -43,7 +43,17 @@ export default ['umd', 'esm'].map((format) => ({
   }),
   external: Object.keys(pkg.peerDependencies),
   plugins: [
-    typescript(),
+    typescript({
+      tsconfigOverride: {
+        compilerOptions: {
+          declaration: format === 'esm',
+        },
+        exclude: [
+          'docs',
+          'tests',
+        ],
+      },
+    }),
     vue({
       preprocessStyles: true,
     }),
