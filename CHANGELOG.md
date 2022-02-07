@@ -1,3 +1,7 @@
+# [2.0.0](https://github.com/fengyuanchen/vue-countdown/compare/v2.0.0-rc...v2.0.0) (2022-02-07)
+
+
+
 # [2.0.0-rc](https://github.com/fengyuanchen/vue-countdown/compare/v2.0.0-beta...v2.0.0-rc) (2021-06-12)
 
 

@@ -1,8 +1,8 @@
 # vue-countdown
 
-[![Coverage Status](https://img.shields.io/codecov/c/github/fengyuanchen/vue-countdown.svg)](https://codecov.io/gh/fengyuanchen/vue-countdown) [![Downloads](https://img.shields.io/npm/dm/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Version](https://img.shields.io/npm/v/@chenfengyuan/vue-countdown/next.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Gzip Size](https://img.shields.io/bundlephobia/minzip/@chenfengyuan/vue-countdown.svg)](https://unpkg.com/@chenfengyuan/vue-countdown/dist/vue-countdown.js)
+[![Coverage Status](https://img.shields.io/codecov/c/github/fengyuanchen/vue-countdown.svg)](https://codecov.io/gh/fengyuanchen/vue-countdown) [![Downloads](https://img.shields.io/npm/dm/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Version](https://img.shields.io/npm/v/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Gzip Size](https://img.shields.io/bundlephobia/minzip/@chenfengyuan/vue-countdown.svg)](https://unpkg.com/@chenfengyuan/vue-countdown/dist/vue-countdown.js)
 
-> Countdown component for Vue 3.
+> Countdown component for Vue 3. For Vue 2, check out the [`v1`](https://github.com/fengyuanchen/vue-countdown/tree/v1) branch.
 
 - [Docs](src/README.md)
 - [Demo](https://fengyuanchen.github.io/vue-countdown)
@@ -14,22 +14,37 @@ dist/
 ├── vue-countdown.js         (UMD, default)
 ├── vue-countdown.min.js     (UMD, compressed)
 ├── vue-countdown.esm.js     (ECMAScript Module)
-└── vue-countdown.esm.min.js (ECMAScript Module, compressed)
+├── vue-countdown.esm.min.js (ECMAScript Module, compressed)
+└── vue-countdown.d.ts       (TypeScript Declaration File)
 ```
 
 ## Getting started
 
 ### Installation
 
+Using npm:
+
 ```shell
-npm install vue@next @chenfengyuan/vue-countdown@next
+npm install vue@3 @chenfengyuan/vue-countdown@2
 ```
 
-In browser:
+Using pnpm:
+
+```shell
+pnpm add vue@3 @chenfengyuan/vue-countdown@2
+```
+
+Using Yarn:
+
+```shell
+yarn add vue@3 @chenfengyuan/vue-countdown@2
+```
+
+Using CDN:
 
 ```html
-<script src="/path/to/vue.js"></script><!-- Vue.js is required -->
-<script src="/path/to/vue-countdown.js"></script>
+<script src="https://unpkg.com/vue@3"></script><!-- Vue.js is required -->
+<script src="https://unpkg.com/@chenfengyuan/vue-countdown@2"></script>
 ```
 
 ### Usage

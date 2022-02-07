@@ -145,6 +145,7 @@ export default defineComponent({
 .markdown-body {
   table {
     display: table;
+    min-width: 100%;
   }
 
   code {
