@@ -1,23 +1,39 @@
 # vue-countdown
 
-[![Build Status](https://img.shields.io/travis/fengyuanchen/vue-countdown.svg)](https://travis-ci.org/fengyuanchen/vue-countdown) [![Coverage Status](https://img.shields.io/codecov/c/github/fengyuanchen/vue-countdown.svg)](https://codecov.io/gh/fengyuanchen/vue-countdown) [![Downloads](https://img.shields.io/npm/dm/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown) [![Version](https://img.shields.io/npm/v/@chenfengyuan/vue-countdown.svg)](https://www.npmjs.com/package/@chenfengyuan/vue-countdown)
-
-> Countdown component for [Vue.js](https://vuejs.org/).
+> Countdown component for [Vue 2](https://v2.vuejs.org/).
 
 - [Website](https://fengyuanchen.github.io/vue-countdown)
 
 ## Table of contents
 
-- [Main](#main)
-- [Getting started](#getting-started)
-- [Props](#props)
-- [Methods](#methods)
-- [Events](#events)
-- [Browser support](#browser-support)
-- [Versioning](#versioning)
-- [License](#license)
+- [vue-countdown](#vue-countdown)
+  - [Table of contents](#table-of-contents)
+  - [Main files](#main-files)
+  - [Getting started](#getting-started)
+    - [Install](#install)
+    - [Usage](#usage)
+  - [Props](#props)
+    - [auto-start](#auto-start)
+    - [emit-events](#emit-events)
+    - [interval](#interval)
+    - [now](#now)
+    - [tag](#tag)
+    - [time](#time)
+    - [transform](#transform)
+  - [Methods](#methods)
+    - [start](#start)
+    - [abort](#abort)
+    - [end](#end)
+  - [Events](#events)
+    - [start](#start-1)
+    - [progress](#progress)
+    - [abort](#abort-1)
+    - [end](#end-1)
+  - [Browser support](#browser-support)
+  - [Versioning](#versioning)
+  - [License](#license)
 
-## Main
+## Main files
 
 ```text
 dist/
@@ -32,7 +48,7 @@ dist/
 ### Install
 
 ```shell
-npm install @chenfengyuan/vue-countdown vue
+npm install vue@2 @chenfengyuan/vue-countdown@1
 ```
 
 In browser:
