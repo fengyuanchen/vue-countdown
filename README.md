@@ -7,7 +7,7 @@
 - [Docs](src/README.md)
 - [Demo](https://fengyuanchen.github.io/vue-countdown)
 
-## Main files
+## Main npm package files
 
 ```text
 dist/
