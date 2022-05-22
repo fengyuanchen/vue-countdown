@@ -152,4 +152,45 @@ describe('events', () => {
       setTimeout(done, 1000);
     });
   });
+
+  describe('restart', () => {
+    it('should trigger the `restart` event', (done) => {
+      mount({
+        components: {
+          VueCountdown,
+        },
+        mounted() {
+          setTimeout(() => {
+            (this.$refs.countdown as any).restart();
+          }, 500);
+        },
+        methods: {
+          onCountdownRestart() {
+            done();
+          },
+        },
+        template: '<vue-countdown ref="countdown" :time="1000" @restart="onCountdownRestart" />',
+      });
+    });
+
+    it('should not trigger the `restart` event when the `emit-events` property is set to `false`', (done) => {
+      mount({
+        components: {
+          VueCountdown,
+        },
+        mounted() {
+          setTimeout(() => {
+            (this.$refs.countdown as any).restart();
+          }, 500);
+        },
+        methods: {
+          onCountdownRestart() {
+            throw new Error();
+          },
+        },
+        template: '<vue-countdown ref="countdown" :time="1000" :emit-events="false" @restart="onCountdownRestart" />',
+      });
+      setTimeout(done, 1000);
+    });
+  });
 });
