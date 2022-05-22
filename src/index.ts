@@ -10,6 +10,7 @@ const MILLISECONDS_DAY = 24 * MILLISECONDS_HOUR;
 const EVENT_ABORT = 'abort';
 const EVENT_END = 'end';
 const EVENT_PROGRESS = 'progress';
+const EVENT_RESTART = 'restart';
 const EVENT_START = 'start';
 const EVENT_VISIBILITY_CHANGE = 'visibilitychange';
 
@@ -80,6 +81,7 @@ export default defineComponent({
     EVENT_ABORT,
     EVENT_END,
     EVENT_PROGRESS,
+    EVENT_RESTART,
     EVENT_START,
   ],
 
@@ -194,12 +196,7 @@ export default defineComponent({
        * Update the countdown when props changed.
        */
       handler() {
-        this.totalMilliseconds = this.time;
-        this.endTime = this.now() + this.time;
-
-        if (this.autoStart) {
-          this.start();
-        }
+        this.timeHandler();
       },
     },
   },
@@ -214,6 +211,15 @@ export default defineComponent({
   },
 
   methods: {
+    timeHandler() {
+      this.totalMilliseconds = this.time;
+      this.endTime = this.now() + this.time;
+
+      if (this.autoStart) {
+        this.start();
+      }
+    },
+
     /**
      * Starts to countdown.
      * @public
@@ -345,6 +351,23 @@ export default defineComponent({
          * @event Countdown#abort
          */
         this.$emit(EVENT_ABORT);
+      }
+    },
+
+    /**
+     * Restart the countdown.
+     * @public
+     * @emits Countdown#restart
+     */
+    restart() {
+      this.timeHandler();
+
+      if (this.emitEvents) {
+        /**
+         * Countdown restart event.
+         * @event Countdown#abort
+         */
+        this.$emit(EVENT_RESTART);
       }
     },
 
