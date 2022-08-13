@@ -382,6 +382,18 @@ export default defineComponent({
     },
 
     /**
+     * Restarts the count.
+     * @public
+     */
+    restart() {
+      this.pause();
+      this.totalMilliseconds = this.time;
+      this.endTime = this.now() + this.time;
+      this.counting = false;
+      this.start();
+    },
+
+    /**
      * visibility change event handler.
      * @private
      */

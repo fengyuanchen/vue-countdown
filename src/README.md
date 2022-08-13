@@ -109,6 +109,7 @@ export default {
 | start | `()` | Starts the countdown. Run automatically when the `auto-start` prop is set to `true`. |
 | abort | `()` | Aborts the countdown immediately. |
 | end | `()` | Ends the countdown manually. |
+| restart | `()` | Restarts the countdown. |
 
 ## Events
 

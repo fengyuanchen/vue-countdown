@@ -81,4 +81,21 @@ describe('methods', () => {
       wrapper.vm.end();
     });
   });
+
+  describe('restart', () => {
+    it('should restart the countdown', (done) => {
+      const wrapper = mount(VueCountdown, {
+        props: {
+          time: 5000,
+        },
+      });
+
+      setTimeout(() => {
+        expect(wrapper.vm.totalMilliseconds).toBeLessThan(5000);
+        wrapper.vm.restart();
+        expect(wrapper.vm.totalMilliseconds).toBe(5000);
+        done();
+      }, 1500);
+    });
+  });
 });
