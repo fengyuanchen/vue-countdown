@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/fengyuanchen/vue-countdown/compare/v2.0.0...v2.1.0) (2022-08-13)
+
+
+### Features
+
+* add `restart` method ([d4ad1da](https://github.com/fengyuanchen/vue-countdown/commit/d4ad1dae77b38b3d09913ac00ea8d3ec5c2f2fa3))
+
+
+
 # [2.0.0](https://github.com/fengyuanchen/vue-countdown/compare/v2.0.0-rc...v2.0.0) (2022-02-07)
 
 
