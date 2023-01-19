@@ -19,31 +19,32 @@ dist/
 ```
 
 ## Getting started
+This installation is only for Vue 3, check out the [`v1`](https://github.com/fengyuanchen/vue-countdown/tree/v1) for Vue 2 
 
-### Installation
+### Installation (Vue 3)
 
 Using npm:
 
 ```shell
-npm install vue@3 @chenfengyuan/vue-countdown@2
+npm install @chenfengyuan/vue-countdown@2
 ```
 
 Using pnpm:
 
 ```shell
-pnpm add vue@3 @chenfengyuan/vue-countdown@2
+pnpm add @chenfengyuan/vue-countdown@2
 ```
 
 Using Yarn:
 
 ```shell
-yarn add vue@3 @chenfengyuan/vue-countdown@2
+yarn add @chenfengyuan/vue-countdown@2
 ```
 
 Using CDN:
+If you like to use via CDN add this to to your Vue 3 projects
 
 ```html
-<script src="https://unpkg.com/vue@3"></script><!-- Vue.js is required -->
 <script src="https://unpkg.com/@chenfengyuan/vue-countdown@2"></script>
 ```
 
@@ -67,7 +68,12 @@ app.component(VueCountdown.name, VueCountdown);
 
 ## Browser support
 
-Same as Vue 3.
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Opera (latest)
+- Edge (latest)
+- Internet Explorer 9+
 
 ## Versioning
 
