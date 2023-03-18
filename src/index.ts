@@ -302,7 +302,7 @@ export default defineComponent({
         return;
       }
 
-      this.totalMilliseconds -= this.interval;
+      this.update();
 
       if (this.emitEvents && this.totalMilliseconds > 0) {
         /**
