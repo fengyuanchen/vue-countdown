@@ -1,3 +1,12 @@
+## [2.1.1](https://github.com/fengyuanchen/vue-countdown/compare/v2.1.0...v2.1.1) (2023-03-18)
+
+
+### Bug Fixes
+
+* update the total milliseconds correctly ([88db379](https://github.com/fengyuanchen/vue-countdown/commit/88db37963bced3e9beaf07f541beff330105a6d9)), closes [#43](https://github.com/fengyuanchen/vue-countdown/issues/43)
+
+
+
 # [2.1.0](https://github.com/fengyuanchen/vue-countdown/compare/v2.0.0...v2.1.0) (2022-08-13)
 
 
