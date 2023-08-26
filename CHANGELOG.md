@@ -1,3 +1,12 @@
+## [2.1.2](https://github.com/fengyuanchen/vue-countdown/compare/v2.1.1...v2.1.2) (2023-08-26)
+
+
+### Bug Fixes
+
+* reset the end time on start when the `autoStart` prop is set to `false` ([10aef5f](https://github.com/fengyuanchen/vue-countdown/commit/10aef5fc7ce88731291d35ccbb4add2acd8f905a)), closes [#93](https://github.com/fengyuanchen/vue-countdown/issues/93)
+
+
+
 ## [2.1.1](https://github.com/fengyuanchen/vue-countdown/compare/v2.1.0...v2.1.1) (2023-03-18)
 
 
