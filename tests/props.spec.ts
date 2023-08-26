@@ -38,7 +38,7 @@ describe('props', () => {
         },
         mounted() {
           setTimeout(() => {
-            this.autoStart = true;
+            (this as any).autoStart = true;
           }, 100);
         },
         methods: {
@@ -115,10 +115,10 @@ describe('props', () => {
         },
         methods: {
           onCountdownStart() {
-            this.startTime = Date.now();
+            (this as any).startTime = Date.now();
           },
           onCountdownEnd() {
-            const interval = Date.now() - this.startTime;
+            const interval = Date.now() - (this as any).startTime;
 
             expect(interval).toBeLessThan(200);
             done();
@@ -209,10 +209,10 @@ describe('props', () => {
           };
         },
         mounted() {
-          expect((this.$refs.countdown as any).totalMilliseconds).toBe(1000);
-          this.time = 2000;
-          this.$nextTick(() => {
-            expect((this.$refs.countdown as any).totalMilliseconds).toBe(2000);
+          expect((this as any).$refs.countdown.totalMilliseconds).toBe(1000);
+          (this as any).time = 2000;
+          (this as any).$nextTick(() => {
+            expect((this as any).$refs.countdown.totalMilliseconds).toBe(2000);
             done();
           });
         },
@@ -228,7 +228,7 @@ describe('props', () => {
           VueCountdown,
         },
         mounted() {
-          expect(this.$el.textContent).toBe('0 days, 0 hours, 0 minutes, 2 seconds, 0 milliseconds.');
+          expect((this as any).$el.textContent).toBe('0 days, 0 hours, 0 minutes, 2 seconds, 0 milliseconds.');
           done();
         },
         template: '<vue-countdown :time="2000" v-slot="{ days, hours, minutes, seconds, milliseconds }">{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds, {{ milliseconds }} milliseconds.</vue-countdown>',
@@ -241,7 +241,7 @@ describe('props', () => {
           VueCountdown,
         },
         mounted() {
-          expect(this.$el.textContent).toBe('00 days, 00 hours, 00 minutes, 02 seconds, 00 milliseconds.');
+          expect((this as any).$el.textContent).toBe('00 days, 00 hours, 00 minutes, 02 seconds, 00 milliseconds.');
           done();
         },
         methods: {

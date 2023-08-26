@@ -89,7 +89,7 @@ describe('events', () => {
         },
         mounted() {
           setTimeout(() => {
-            (this.$refs.countdown as any).abort();
+            (this as any).$refs.countdown.abort();
           }, 500);
         },
         methods: {
@@ -108,7 +108,7 @@ describe('events', () => {
         },
         mounted() {
           setTimeout(() => {
-            (this.$refs.countdown as any).abort();
+            (this as any).$refs.countdown.abort();
             setTimeout(done, 500);
           }, 500);
         },
