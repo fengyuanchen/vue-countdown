@@ -226,6 +226,11 @@ export default defineComponent({
 
       this.counting = true;
 
+      if (!this.autoStart) {
+        this.totalMilliseconds = this.time;
+        this.endTime = this.now() + this.time;
+      }
+
       if (this.emitEvents) {
         /**
          * Countdown start event.
