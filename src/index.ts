@@ -68,7 +68,7 @@ export default defineComponent({
     },
 
     /**
-     * Transforms the output props before render.
+     * Transforms the output props before rendering.
      */
     transform: {
       type: Function,
@@ -108,6 +108,12 @@ export default defineComponent({
        * @type {number}
        */
       requestId: 0,
+
+      /**
+       * Automatically pause the countdown when the document is hidden.
+       * @type {boolean}
+       */
+      autoPauseOnHide: false,
     };
   },
 
@@ -295,6 +301,7 @@ export default defineComponent({
      */
     pause() {
       cancelAnimationFrame(this.requestId);
+      this.requestId = 0;
     },
 
     /**
@@ -405,12 +412,19 @@ export default defineComponent({
     handleVisibilityChange() {
       switch (document.visibilityState) {
         case 'visible':
-          this.update();
-          this.continue();
+          if (this.requestId === 0 && this.autoPauseOnHide) {
+            this.update();
+            this.continue();
+          }
+
+          this.autoPauseOnHide = false;
           break;
 
         case 'hidden':
-          this.pause();
+          if (this.requestId > 0) {
+            this.autoPauseOnHide = true;
+            this.pause();
+          }
           break;
 
         default:
