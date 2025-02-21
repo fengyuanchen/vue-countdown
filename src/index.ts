@@ -14,6 +14,10 @@ const EVENT_START = 'start';
 const EVENT_VISIBILITY_CHANGE = 'visibilitychange';
 
 export default defineComponent({
+  compatConfig: {
+    MODE: 3
+  },
+
   name: 'VueCountdown',
 
   props: {
