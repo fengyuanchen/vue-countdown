@@ -1,3 +1,12 @@
+## [2.1.3](https://github.com/fengyuanchen/vue-countdown/compare/v2.1.2...v2.1.3) (2025-03-01)
+
+
+### Bug Fixes
+
+* improve visibility change event handler in case of the countdown is paused ([6ced876](https://github.com/fengyuanchen/vue-countdown/commit/6ced876555b471bfb3ff90107debc6d52eaabdfa)), closes [#77](https://github.com/fengyuanchen/vue-countdown/issues/77)
+
+
+
 ## [2.1.2](https://github.com/fengyuanchen/vue-countdown/compare/v2.1.1...v2.1.2) (2023-08-26)
 
 
